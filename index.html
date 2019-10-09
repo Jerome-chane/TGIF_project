@@ -10,9 +10,9 @@
 
 
 
-<body>
+<body class="container pt-5">
 
-    <header>
+    <header class="sticky-top">
         <div class="navbar navbar-default">
             <h1> <img src="./images/TGIF_logo.png" alt="TGIF logo"><a
                     href="https://www.whitehouse.gov/the_press_office/TransparencyandOpenGovernment"
@@ -22,29 +22,57 @@
                     src="./images/open-email-envelope_1020-530.jpg">info@tgif.net</a>
         </div>
 
+        <nav id="nav" class="navbar navbar-expand-lg bg-light">
+
+            <div>
+                <ul class="navbar-nav">
+                    <li class="nav-item active"><a class="nav-link" href="./index.html">Home</a></li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" href="#">Congress 113</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="list-unstyled">
+                                <li><a class="nav-link  dropdown-item" href="./senate.html">Senate</a></li>
+                                <li><a class="nav-link dropdown-item" href="./house.html">House</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" href="#">Attendence</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="list-unstyled">
+                                <li><a class="nav-link  dropdown-item" href="./senate_attendence.html">Senate
+                                        Attendence</a></li>
+                                <li><a class="nav-link dropdown-item" href="./house_attendance.html">House
+                                        Attendence</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" href="#">Party Loyalty</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul class="list-unstyled">
+                                <li><a class="nav-link  dropdown-item" href="./senate_loyalty.html">Senate Loyalty</a>
+                                </li>
+                                <li><a class="nav-link dropdown-item" href="./house_loyalty.html">House Loyalty</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
     </header>
-
-
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light ">
-
-        <div>
-            <ul class="navbar-nav">
-                <li class="nav-item active"><a class="nav-link" href="./index.html">Home</a></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" href="#" Dropdown>Congress 113</a>
-
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <ul class="list-unstyled">
-                            <li><a class="nav-link  dropdown-item" href="./senate.html">Senate</a></li>
-                            <li><a class="nav-link dropdown-item" href="./house.html">House</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
 
     <main>
@@ -122,32 +150,32 @@
                     <p>The United States passed its Freedom of Information Act (FOIA) in 1966, FOIAs, Access to
                         Information Acts (AIAs) or equivalent laws were passed in Denmark and Norway in 1970.</p>
             </div>
-            <button id="butt" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Read
-                More</button>
+            <a id="butt" href="#demo" class="btn btn-info" data-toggle="collapse">Read
+                More</a>
         </div>
 
     </main>
-    <footer id="scroll" class="page-footer">
+    <footer class="page-footer">
 
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
 
-</body>
-<link rel='stylesheet' type='text/css' href='./style.css'>
-<script src="./113_house_representatives.js"></script>
-<script src="./house_data.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-</script>
 
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <link rel='stylesheet' type='text/css' href='./style.css'>
+    <script src="./main.js"></script>
+</body>
 
 </html>

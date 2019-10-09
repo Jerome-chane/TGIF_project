@@ -45,3 +45,7 @@ th {
 #butt {
     margin-bottom: 50px;
 }
+
+.sticky-top {
+    background-color: white;
+}

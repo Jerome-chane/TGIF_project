@@ -28,6 +28,7 @@ table_house_header(house_table_header);
 
 function tab_house_members(arg) {
     let body = document.getElementById('house_tab');
+    let tbody = document.createElement('tbody');
     for (var i = 0, e = arg.length; i < e; i++) {
         let row = document.createElement('tr');
         let name = document.createElement('td');
@@ -42,11 +43,12 @@ function tab_house_members(arg) {
             '</a>';
         party.innerHTML = arg[i].party;
         state.innerHTML = arg[i].state;
-        years.innerHTML = arg[i].seignority || '';
+        years.innerHTML = arg[i].seniority || '';
         votes.innerHTML = arg[i].votes_with_party_pct + '%';
 
         row.append(name, party, state, years, votes);
-        body.append(row)
+        tbody.append(row)
     }
+    body.append(tbody)
 }
 tab_house_members(house_members);

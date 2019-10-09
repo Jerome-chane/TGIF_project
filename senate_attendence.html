@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Senate</title>
+    <title>Senate Attendance</title>
 </head>
 
 
-
-
-
 <body class="container pt-5">
+
     <header class="sticky-top">
         <div class="navbar navbar-default">
             <h1> <img src="./images/TGIF_logo.png" alt="TGIF logo"><a
@@ -75,33 +73,45 @@
 
     </header>
 
+    <main>
 
-    <div class="container float-left col-9 txt">
-        <h2>Senators</h2>
-        <p class="text-sm-left">First convened in 1789, the composition and powers of the Senate are established in
-            Article
-            One
-            of the
-            U.S.
-            Constitution. Each state is represented by two senators, regardless of population, who serve staggered
-            six-year
-            terms. The Senate has several exclusive powers not granted to the House, including consenting to
-            treaties as
-            a
-            precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries,
-            federal
-            judges, other federal executive officials, military officers, regulatory officials, ambassadors, and
-            other
-            federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
-    </div>
+        <h2>Attendance</h2>
+        <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house.
+            Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most
+            cases, debates continue even if a majority is not present.</p>
+        <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye"
+            or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters,
+            as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic
+            device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if
+            present) cast the tiebreaking vote.</p>
+        <h2>Senate at a glance</h2>
 
-    <div id="tab" class=" container table-responsive"></div>
+        <div id="glance_tab" class="tab container table-responsive"></div>
+
+
+
+        <h2>Least Engaged (Bottom 10% Attendance)</h2>
+
+        <div id="engaged_tab" class="tab container table-responsive"></div>
+
+
+
+
+        <h2>Most Engaged (Top 10% Attendance)</h2>
+
+        <div id="engaged_tab2" class="tab container table-responsive"></div>
+
+
+
+
+    </main>
 
     <footer class="page-footer">
 
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
+
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -115,10 +125,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-
-    <script src="./113_senate.js"></script>
-    <script src="./senate_data.js"></script>
     <link rel='stylesheet' type='text/css' href='./style.css'>
+    <script src="./113_house_representatives.js"></script>
+    <script src="./113_senate.js"></script>
+    <script src="./calcul.js"></script>
+
+
 </body>
 
 </html>

@@ -5,14 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Senate</title>
+    <title>House Loyalty</title>
 </head>
 
-
-
-
-
 <body class="container pt-5">
+
     <header class="sticky-top">
         <div class="navbar navbar-default">
             <h1> <img src="./images/TGIF_logo.png" alt="TGIF logo"><a
@@ -74,34 +71,41 @@
         </nav>
 
     </header>
+    <main>
+
+        <h2>Party Loyalty</h2>
+        <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively,
+            tend to be the most faithful in voting for their party's nominee for office and legislation that backs their
+            party's agenda. </p>
+
+        <h2>Senate at a glance</h2>
+
+        <div id="tab" class=" container table-responsive"></div>
 
 
-    <div class="container float-left col-9 txt">
-        <h2>Senators</h2>
-        <p class="text-sm-left">First convened in 1789, the composition and powers of the Senate are established in
-            Article
-            One
-            of the
-            U.S.
-            Constitution. Each state is represented by two senators, regardless of population, who serve staggered
-            six-year
-            terms. The Senate has several exclusive powers not granted to the House, including consenting to
-            treaties as
-            a
-            precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries,
-            federal
-            judges, other federal executive officials, military officers, regulatory officials, ambassadors, and
-            other
-            federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
-    </div>
 
-    <div id="tab" class=" container table-responsive"></div>
+        <h2>Least Loyal (Bottom 10% of Party)</h2>
+
+        <div id="tab" class=" container table-responsive"></div>
+
+
+
+
+        <h2>Most Loyal (Top 10% of Party)</h2>
+
+        <div id="tab" class=" container table-responsive"></div>
+
+
+
+
+    </main>
 
     <footer class="page-footer">
 
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
+
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -115,10 +119,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-
-    <script src="./113_senate.js"></script>
-    <script src="./senate_data.js"></script>
     <link rel='stylesheet' type='text/css' href='./style.css'>
+    <script src="113_senate.js"></script>
+    <script src="./113_house_representatives.js"></script>
+    <script src="./calcul.js"></script>
+
+
 </body>
 
 </html>

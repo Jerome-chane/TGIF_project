@@ -10,7 +10,6 @@ function create_senate_table() {
     body.appendChild(table_senat);
 };
 
-
 function table_senat_header(header) {
     let thead = document.createElement("thead");
     let row = document.createElement("tr");
@@ -22,9 +21,7 @@ function table_senat_header(header) {
     }
 
     thead.append(row);
-
     document.getElementById('senat_tab').appendChild(thead);
-
 }
 
 create_senate_table();
