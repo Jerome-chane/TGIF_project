@@ -1,60 +1,88 @@
-// let house_table_header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
-let senat_members = data.results[0].members;
-let senate_stats = {
-    'Number of Democrats': 0,
-    'Number of Republicans': 0,
-    'Number of Independents': 0,
-    'Democrats average votes with their party': 0,
-    'Republicans average votes with their party': 0,
-    'Members who most often vote with their party': 0,
-    'Members who most often do not vote with their party': 0,
-    'Members who missed the most votes': 0,
-    'Members who have missed the least votes': 0,
+function create_tables() {
+
+    let glance_header = ['Party', 'Number of Reps', '% Voted with Prty'];
+    let glance_rows = ['Democrats', 'Republicans', 'Independents', 'Total'];
+
+    function create_glance_table() {
+        let body = document.getElementById('glance_tab');
+        let table = document.createElement('table');
+        table.setAttribute('class', 'table table-bordered table-hover');
+        table.setAttribute('id', 'tab1');
+        body.appendChild(table);
+    };
+
+    function glance_table_header() {
+        let thead = document.createElement("thead");
+        let row = document.createElement("tr");
+        for (var i = 0, e = glance_header.length; i < e; i++) {
+            let table_glance_header = document.createElement('th');
+            table_glance_header.setAttribute('class', 'text-center');
+            table_glance_header.innerHTML = glance_header[i];
+            row.append(table_glance_header);
+        }
+
+        thead.append(row);
+        document.getElementById('tab1').appendChild(thead);
+    };
+
+    function glance_tab() {
+        let table = document.getElementById('tab1');
+        let body = document.createElement('tbody');
+        table.append(body);
+        for (var i = glance_rows.length - 1; i >= 0; i--) {
+            let row = body.insertRow(glance_rows[i]);
+            let data = row.insertCell(glance_rows[i]);
+            row.setAttribute('id', glance_rows[i]);
+            data.innerHTML = glance_rows[i];
+
+        }
+        let d = document.getElementById('Democrats')
+        let d1 = d.insertCell(1);
+        let d2 = d.insertCell(2);
+        d1.innerHTML = stats["Number of Democrats"];
+        d2.innerHTML = Math.floor(stats["Democrats average votes with their party"]) + '%';
+        let r = document.getElementById('Republicans')
+        let r1 = r.insertCell(1);
+        let r2 = r.insertCell(2);
+        r1.innerHTML = stats["Number of Republicans"];
+        r2.innerHTML = Math.floor(stats["Republicans average votes with their party"]) + '%';
+        let id = document.getElementById('Independents');
+        let id1 = id.insertCell(1)
+        let id2 = id.insertCell(2)
+        id1.innerHTML = stats["Number of Independents"];
+        id2.innerHTML = Math.floor(stats["Independents average votes with their party"]) + '%';
+        let tot = document.getElementById('Total');
+        let tot1 = tot.insertCell(1)
+        let tot2 = tot.insertCell(2)
+        tot1.innerHTML = total_members
+        tot2.innerHTML = Math.floor((stats["Republicans average votes with their party"] + stats["Democrats average votes with their party"] + stats["Independents average votes with their party"]) / 3) + '%';
+    };
+    create_glance_table();
+    glance_table_header();
+    glance_tab();
+};
+create_tables()
+
+function tab_senate_members(arr, arg) {
+    let body = document.getElementById('at_tab');
+    let tbody = document.createElement("tbody");
+    for (var i = 0; i < arr.length; i++) {
+        let row = document.createElement('tr');
+        let name = document.createElement('td');
+        let missed_votes = document.createElement('td');
+        let missed_pct = document.createElement('td')
+
+        name.innerHTML = '<a target="_blank" href="' + arr[i].url + '">' +
+            arr[i].last_name + ' ' + arr[i].first_name + ' ' + (arr[i].middle_name || ' ') +
+            '</a>';
+        missed_votes.innerHTML = arr[i].missed_votes;
+        missed_pct.innerHTML = arr[i].missed_votes_pct + '%';
+        row.append(name, missed_votes, missed_pct)
+        tbody.append(row);
+
+    }
+    body.appendChild(tbody)
+
 };
 
-let democrats = [];
-let republicans = [];
-let independents = [];
-
-function count(obj) {
-    for (var i = 0, e = obj.length; i < e; i++) {
-        if (obj[i].party === 'R') {
-            republicans.push(obj[i]);
-        } else if (obj[i].party === 'D') {
-            democrats.push(obj[i]);
-        } else {
-            independents.push(obj[i])
-        };
-    }
-}
-count(senat_members);
-// console.log(independents);
-// console.log(democrats);
-// console.log(republicans);
-
-
-
-function create_house_table() {
-    let body = document.getElementById('tab');
-    let table_house = document.createElement('table');
-    table_house.setAttribute('class', 'table table-bordered table-hover');
-    table_house.setAttribute('id', 'house_tab');
-    body.appendChild(table_house);
-
-}
-
-function table_house_header(header) {
-    let thead = document.createElement('thead');
-    let row = document.createElement('tr');
-    for (var i = 0, e = header.length; i < e; i++) {
-        let table_house_header = document.createElement('th');
-        table_house_header.setAttribute('class', 'text-center');
-        table_house_header.innerHTML = header[i];
-        row.append(table_house_header);
-    }
-
-    thead.append(row);
-    document.getElementById('house_tab').appendChild(thead);
-}
-// create_house_table();
-// table_house_header(house_table_header);
+tab_senate_members(members);

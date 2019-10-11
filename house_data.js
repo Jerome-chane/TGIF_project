@@ -1,5 +1,5 @@
 let house_table_header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
-let house_members = house_data.results[0].members;
+let house_members = data.results[0].members;
 
 function create_house_table() {
     let body = document.getElementById('tab');
