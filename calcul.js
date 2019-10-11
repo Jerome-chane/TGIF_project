@@ -15,9 +15,10 @@ function count(obj) {
     }
 }
 count(members);
-// .sort(function(a, b){return a-b});
 
-console.log(members.values())
+
+
+
 
 
 
@@ -28,3 +29,4 @@ stats["Democrats average votes with their party"] = sumDemVotes / democrats.leng
 stats["Republicans average votes with their party"] = sumRepVotes / republicans.length;
 stats["Independents average votes with their party"] = sumIndVotes / independents.length;
 let total_members = stats["Number of Democrats"] + stats["Number of Republicans"] + stats["Number of Independents"];
+let totalAvg = (sumDemVotes + sumIndVotes + sumRepVotes) / members.length;

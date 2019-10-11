@@ -40,22 +40,22 @@ function create_tables() {
         let d1 = d.insertCell(1);
         let d2 = d.insertCell(2);
         d1.innerHTML = stats["Number of Democrats"];
-        d2.innerHTML = Math.floor(stats["Democrats average votes with their party"]) + '%';
+        d2.innerHTML = stats["Democrats average votes with their party"].toFixed(2) + '%';
         let r = document.getElementById('Republicans')
         let r1 = r.insertCell(1);
         let r2 = r.insertCell(2);
         r1.innerHTML = stats["Number of Republicans"];
-        r2.innerHTML = Math.floor(stats["Republicans average votes with their party"]) + '%';
+        r2.innerHTML = stats["Republicans average votes with their party"].toFixed(2) + '%';
         let id = document.getElementById('Independents');
         let id1 = id.insertCell(1)
         let id2 = id.insertCell(2)
         id1.innerHTML = stats["Number of Independents"];
-        id2.innerHTML = Math.floor(stats["Independents average votes with their party"]) + '%';
+        id2.innerHTML = stats["Independents average votes with their party"].toFixed(2) + '%';
         let tot = document.getElementById('Total');
         let tot1 = tot.insertCell(1)
         let tot2 = tot.insertCell(2)
         tot1.innerHTML = total_members
-        tot2.innerHTML = Math.floor((stats["Republicans average votes with their party"] + stats["Democrats average votes with their party"] + stats["Independents average votes with their party"]) / 3) + '%';
+        tot2.innerHTML = totalAvg.toFixed(2) + '%';
     };
     create_glance_table();
     glance_table_header();
@@ -63,10 +63,25 @@ function create_tables() {
 };
 create_tables()
 
-function tab_senate_members(arr, arg) {
-    let body = document.getElementById('at_tab');
-    let tbody = document.createElement("tbody");
-    for (var i = 0; i < arr.length; i++) {
+function sortMembers(a, b) {
+    let missed = a.missed_votes_pct;
+    let missed2 = b.missed_votes_pct;
+    let comparaison = 0;
+
+    if (missed > missed2) {
+        comparaison = 1;
+    } else if (missed < missed2) {
+        comparaison = -1;
+    }
+    return comparaison;
+}
+let sorted = members.sort(sortMembers);
+let topTen = (sorted.length * 10 / 100)
+
+function lessMissedVotes(arr) {
+    let body = document.getElementById('tab2');
+    let tbody = document.createElement('tbody');
+    for (var i = 0; i < topTen; i++) {
         let row = document.createElement('tr');
         let name = document.createElement('td');
         let missed_votes = document.createElement('td');
@@ -80,9 +95,34 @@ function tab_senate_members(arr, arg) {
         row.append(name, missed_votes, missed_pct)
         tbody.append(row);
 
+
     }
-    body.appendChild(tbody)
+    body.append(tbody)
+
+};
+lessMissedVotes(sorted);
+
+function topMissedVotes(arr) {
+    let body = document.getElementById('at_tab');
+    let tbody = document.createElement('tbody');
+    for (var i = 0; i < topTen; i++) {
+        let row = document.createElement('tr');
+        let name = document.createElement('td');
+        let missed_votes = document.createElement('td');
+        let missed_pct = document.createElement('td')
+
+        name.innerHTML = '<a target="_blank" href="' + arr[i].url + '">' +
+            arr[i].last_name + ' ' + arr[i].first_name + ' ' + (arr[i].middle_name || ' ') +
+            '</a>';
+        missed_votes.innerHTML = arr[i].missed_votes;
+        missed_pct.innerHTML = arr[i].missed_votes_pct + '%';
+        row.append(name, missed_votes, missed_pct)
+        tbody.append(row);
+
+
+    }
+    body.append(tbody)
 
 };
 
-tab_senate_members(members);
+topMissedVotes(sorted.reverse());

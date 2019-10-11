@@ -12,9 +12,75 @@ function glance_tab() {
     d1.innerHTML = democrats.length
     d2.innerHTML = Math.floor(stats["Democrats average votes with their party"]) + '%';
     i1.innerHTML = independents.length
-    i2.innerHTML = Math.floor(stats["Independents average votes with their party"]) + "%";
+    i2.innerHTML = 0 + "%"
     t1.innerHTML = total_members
     t2.innerHTML = Math.floor((stats["Republicans average votes with their party"] + stats["Democrats average votes with their party"]) / 2) + "%";
 
 }
+
 glance_tab()
+
+function sortMembers(a, b) {
+    let missed = a.votes_with_party_pct;
+    let missed2 = b.votes_with_party_pct;
+    let comparaison = 0;
+
+    if (missed > missed2) {
+        comparaison = 1;
+    } else if (missed < missed2) {
+        comparaison = -1;
+    }
+    return comparaison;
+}
+let sorted = members.sort(sortMembers);
+let topTen = (sorted.length * 10 / 100)
+
+function lessMissedVotes(arr) {
+    let body = document.getElementById('tab1');
+    let tbody = document.createElement('tbody');
+    for (var i = 0; i < topTen; i++) {
+        let row = document.createElement('tr');
+        let name = document.createElement('td');
+        let tot_votes = document.createElement('td');
+        let votes_pct = document.createElement('td')
+
+        name.innerHTML = '<a target="_blank" href="' + arr[i].url + '">' +
+            arr[i].last_name + ' ' + arr[i].first_name + ' ' + (arr[i].middle_name || ' ') +
+            '</a>';
+        tot_votes.innerHTML = arr[i].total_votes;
+        votes_pct.innerHTML = arr[i].votes_with_party_pct + '%';
+        row.append(name, tot_votes, votes_pct)
+        tbody.append(row);
+
+
+    }
+    body.append(tbody)
+
+};
+
+lessMissedVotes(sorted);
+
+function topMissedVotes(arr) {
+    let body = document.getElementById('tab2');
+    let tbody = document.createElement('tbody');
+    for (var i = 0; i < topTen; i++) {
+        let row = document.createElement('tr');
+        let name = document.createElement('td');
+        let tot_votes = document.createElement('td');
+        let votes_pct = document.createElement('td')
+
+        name.innerHTML = '<a target="_blank" href="' + arr[i].url + '">' +
+            arr[i].last_name + ' ' + arr[i].first_name + ' ' + (arr[i].middle_name || ' ') +
+            '</a>';
+        tot_votes.innerHTML = arr[i].total_votes;
+        votes_pct.innerHTML = arr[i].votes_with_party_pct + '%';
+        row.append(name, tot_votes, votes_pct)
+        tbody.append(row);
+
+
+    }
+    body.append(tbody)
+
+};
+
+topMissedVotes(sorted.reverse());
