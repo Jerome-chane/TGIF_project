@@ -82,6 +82,9 @@ function lessMissedVotes(arr) {
     let body = document.getElementById('tab2');
     let tbody = document.createElement('tbody');
     for (var i = 0; i < topTen; i++) {
+        if (arr[11].missed_votes_pct === arr[i].missed_votes_pct) {
+            topTen++;
+        }
         let row = document.createElement('tr');
         let name = document.createElement('td');
         let missed_votes = document.createElement('td');
@@ -106,6 +109,9 @@ function topMissedVotes(arr) {
     let body = document.getElementById('at_tab');
     let tbody = document.createElement('tbody');
     for (var i = 0; i < topTen; i++) {
+        if (arr[11].missed_votes_pct === arr[i].missed_votes_pct) {
+            topTen++;
+        }
         let row = document.createElement('tr');
         let name = document.createElement('td');
         let missed_votes = document.createElement('td');
