@@ -108,7 +108,20 @@
             federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
     </div>
 
-    <div id="tab" class=" container table-responsive"></div>
+
+    <div id="tab" class=" container table-responsive">
+        <div>
+            <span>Filter by Party:</span>
+            <label> <input type="checkbox" name="Democrat" value="Democrat" id="Democrat" checked>
+                Democrat</label>
+            <label> <input type="checkbox" name="Republican" value="Republican" id="Republican" checked>
+                Republican</label>
+            <label> <input type="checkbox" name="Independent" value="Independent" id="Independent" checked>
+                Independent</label>
+        </div>
+        <div class="container" id="message"></div>
+
+    </div>
 
     <footer class="page-footer">
 
@@ -119,7 +132,10 @@
 
 
     <script src="./113_senate.js"></script>
+    <script src="./stats.js"></script>
+    <script src="calcul.js"></script>
     <script src="./senate_data.js"></script>
+
 
 </body>
 

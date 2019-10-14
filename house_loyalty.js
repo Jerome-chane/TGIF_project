@@ -39,9 +39,7 @@ function lessMissedVotes(arr) {
     let body = document.getElementById('tab1');
     let tbody = document.createElement('tbody');
     for (var i = 0; i < topTen; i++) {
-        if (arr[45].votes_with_party_pct === arr[i].votes_with_party_pct) {
-            topTen++;
-        }
+
         let row = document.createElement('tr');
         let name = document.createElement('td');
         let tot_votes = document.createElement('td');
@@ -55,6 +53,9 @@ function lessMissedVotes(arr) {
         row.append(name, tot_votes, votes_pct)
         tbody.append(row);
 
+        if (arr[45].votes_with_party_pct === arr[i].votes_with_party_pct) {
+            topTen++;
+        }
 
     }
     body.append(tbody)
@@ -67,9 +68,7 @@ function topMissedVotes(arr) {
     let body = document.getElementById('tab2');
     let tbody = document.createElement('tbody');
     for (var i = 0; i < topTen; i++) {
-        if (arr[45].votes_with_party_pct === arr[i].votes_with_party_pct) {
-            topTen++;
-        }
+
         let row = document.createElement('tr');
         let name = document.createElement('td');
         let tot_votes = document.createElement('td');
@@ -83,6 +82,9 @@ function topMissedVotes(arr) {
         row.append(name, tot_votes, votes_pct)
         tbody.append(row);
 
+        if (arr[45].votes_with_party_pct === arr[i].votes_with_party_pct) {
+            topTen++;
+        }
 
     }
     body.append(tbody)

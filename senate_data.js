@@ -1,6 +1,9 @@
 let senat_table_header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
 let senat_members = data.results[0].members;
-
+let checkboxFilter = [];
+let rep = document.getElementById("Republican");
+let dem = document.getElementById("Democrat");
+let ind = document.getElementById("Independent");
 
 function create_senate_table() {
     let body = document.getElementById('tab');
@@ -8,6 +11,9 @@ function create_senate_table() {
     table_senat.setAttribute('class', 'table table-bordered table-hover');
     table_senat.setAttribute('id', 'senat_tab');
     body.appendChild(table_senat);
+
+
+
 };
 
 function table_senat_header(header) {
@@ -23,13 +29,14 @@ function table_senat_header(header) {
     thead.append(row);
     document.getElementById('senat_tab').appendChild(thead);
 }
-
 create_senate_table();
-table_senat_header(senat_table_header)
 
 function tab_senate_members(arr) {
     let body = document.getElementById('senat_tab');
+    body.innerHTML = "";
+    table_senat_header(senat_table_header)
     let tbody = document.createElement("tbody");
+
     for (var i = 0; i < arr.length; i++) {
         let row = document.createElement('tr');
         let name = document.createElement('td');
@@ -53,4 +60,52 @@ function tab_senate_members(arr) {
 
 };
 
-tab_senate_members(senat_members);
+
+function filter(obj) {
+    checkboxFilter = [];
+    for (var i = 0; i < obj.length; i++) {
+
+        if (rep.checked && obj[i].party == 'R') {
+            checkboxFilter.push(obj[i]);
+
+        } else if (dem.checked && obj[i].party == 'D') {
+            checkboxFilter.push(obj[i]);
+
+        } else if (ind.checked && obj[i].party == 'I') {
+            checkboxFilter.push(obj[i]);
+
+        }
+    }
+
+    if (checkboxFilter.length == 0) {
+        function msg() {
+            let empty = document.getElementById('senat_tab');
+            empty.innerHTML = ""
+            // let m = document.getElementById('message');
+            // let mess = document.createElement('p');
+            // mess.innerHTML = "Please Select a Party"
+            // m.appendChild(mess);
+            alert("Please Select a Party")
+        }
+        msg();
+    } else
+        tab_senate_members(checkboxFilter)
+}
+
+filter(senat_members)
+
+
+
+
+rep.addEventListener('click', function () {
+    filter(senat_members)
+
+})
+dem.addEventListener('click', function () {
+    filter(senat_members)
+
+})
+ind.addEventListener('click', function () {
+    filter(senat_members)
+
+})
