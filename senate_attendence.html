@@ -109,7 +109,37 @@
                 <div class="col-6">
                     <h2>Senate at a glance</h2>
 
-                    <div id="glance_tab" class="tab container table-responsive"></div>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Party</th>
+                                <th>Number of Reps</th>
+                                <th>% Voted with Prty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Republican</td>
+                                <td id="r1"></td>
+                                <td id="r2"></td>
+                            </tr>
+                            <tr>
+                                <td>Democrat</td>
+                                <td id="d1"></td>
+                                <td id="d2"></td>
+                            </tr>
+                            <tr>
+                                <td>Independent</td>
+                                <td id="i1"></td>
+                                <td id="i2"></td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td id="t1"></td>
+                                <td id="t2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -121,7 +151,7 @@
                 <div class="col-6">
 
                     <h2>Least Engaged (Bottom 10% Attendance)</h2>
-                    <table id='at_tab' class="table table-bordered table-hover">
+                    <table id='tab1' class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -133,7 +163,6 @@
 
                         </tbody>
                     </table>
-
                 </div>
                 <div class="col-6">
                     <h2>Most Engaged (Top 10% Attendance)</h2>
@@ -166,7 +195,8 @@
     <script src="./113_senate.js"></script>
     <script src='./stats.js'></script>
     <script src="./calcul.js"></script>
-    <script src="./senate_attendence.js"></script>
+    <script src="./loyal_n_attendence.js"></script>
+
 
 
 

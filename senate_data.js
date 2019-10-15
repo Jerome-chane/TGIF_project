@@ -11,27 +11,26 @@ function create_senate_table() {
     table_senat.setAttribute('class', 'table table-bordered table-hover');
     table_senat.setAttribute('id', 'senat_tab');
     body.appendChild(table_senat);
-
-
-
 };
-
-function table_senat_header(header) {
-    let thead = document.createElement("thead");
-    let row = document.createElement("tr");
-    for (var i = 0, e = header.length; i < e; i++) {
-        let table_senat_header = document.createElement('th');
-        table_senat_header.setAttribute('class', 'text-center');
-        table_senat_header.innerHTML = header[i];
-        row.append(table_senat_header);
-    }
-
-    thead.append(row);
-    document.getElementById('senat_tab').appendChild(thead);
-}
 create_senate_table();
 
+
 function tab_senate_members(arr) {
+    function table_senat_header(header) {
+        senat_table_header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
+        let thead = document.createElement("thead");
+        let row = document.createElement("tr");
+        for (var i = 0, e = header.length; i < e; i++) {
+            let table_senat_header = document.createElement('th');
+            table_senat_header.setAttribute('class', 'text-center');
+            table_senat_header.innerHTML = header[i];
+            row.append(table_senat_header);
+        }
+
+        thead.append(row);
+        document.getElementById('senat_tab').appendChild(thead);
+    }
+
     let body = document.getElementById('senat_tab');
     body.innerHTML = "";
     table_senat_header(senat_table_header)
@@ -61,8 +60,12 @@ function tab_senate_members(arr) {
 };
 
 
+
+
 function filter(obj) {
     checkboxFilter = [];
+
+
     for (var i = 0; i < obj.length; i++) {
 
         if (rep.checked && obj[i].party == 'R') {
@@ -76,21 +79,38 @@ function filter(obj) {
 
         }
     }
-
-    if (checkboxFilter.length == 0) {
+    if (rep.checked != true && dem.checked != true && ind.checked != true) {
         function msg() {
+            senat_table_header = [];
             let empty = document.getElementById('senat_tab');
             empty.innerHTML = ""
-            // let m = document.getElementById('message');
-            // let mess = document.createElement('p');
-            // mess.innerHTML = "Please Select a Party"
-            // m.appendChild(mess);
-            alert("Please Select a Party")
+            let m = document.getElementById('message');
+            m.setAttribute("class", "alert text-center alert-danger")
+            m.innerHTML = "Please Select a Party"
         }
         msg();
-    } else
-        tab_senate_members(checkboxFilter)
+    } else if (checkboxFilter.length === 0) {
+        function NoResultMsg() {
+            senat_table_header = [];
+            let empty = document.getElementById('house_tab');
+            empty.innerHTML = "";
+            let m = document.getElementById('message');
+            m.setAttribute("class", "alert text-center alert-warning")
+            m.innerHTML = "No Matches found "
+        }
+        NoResultMsg();
+    } else {
+        function deleteMsg() {
+            let m = document.getElementById('message')
+            m.classList.remove("alert-danger");
+            m.innerHTML = "";
+        }
+        deleteMsg();
+    }
+    tab_senate_members(checkboxFilter)
+
 }
+
 
 filter(senat_members)
 
