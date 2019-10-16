@@ -49,3 +49,8 @@ th {
 .sticky-top {
     background-color: white;
 }
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+}

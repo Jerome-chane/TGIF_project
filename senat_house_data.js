@@ -1,6 +1,5 @@
 let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
 let members = data.results[0].members;
-let checkboxFilter = [];
 let rep = document.getElementById("Republican");
 let dem = document.getElementById("Democrat");
 let ind = document.getElementById("Independent");
@@ -11,6 +10,61 @@ let cl2 = "alert text-center alert-warning";
 rep.addEventListener('click', () => filter(members));
 dem.addEventListener('click', () => filter(members));
 ind.addEventListener('click', () => filter(members));
+let statesNames = {
+    AL: "Alabama",
+    AK: "Alaska",
+    AZ: "Arizona",
+    AR: "Arkansas",
+    CA: "California",
+    CO: "Colorado",
+    CT: "Connecticut",
+    DE: "Delaware",
+    FL: "Florida",
+    GA: "Georgia",
+    HI: "Hawaii",
+    ID: "Idaho",
+    IL: "Illinois",
+    IN: "Indiana",
+    IA: "Iowa",
+    KS: "Kansas",
+    KY: "Kentucky",
+    LA: "Louisiana",
+    ME: "Maine",
+    MD: "Maryland",
+    MA: "Massachusetts",
+    MI: "Michigan",
+    MN: "Minnesota",
+    MS: "Mississippi",
+    MO: "Missouri",
+    MT: "Montana",
+    NE: "Nebraska",
+    NV: "Nevada",
+    NH: "New Hampshire",
+    NJ: "New Jersey",
+    NM: "New Mexico",
+    NY: "New York",
+    NC: "North Carolina",
+    ND: "North Dakota",
+    OH: "Ohio",
+    OK: "Oklahoma",
+    OR: "Oregon",
+    PA: "Pennsylvania",
+    RI: "Rhode Island",
+    SC: "South Carolina",
+    SD: "South Dakota",
+    TN: "Tennessee",
+    TX: "Texas",
+    UT: "Utah",
+    VT: "Vermont",
+    VA: " Virginia",
+    WA: "Washington",
+    WV: "West Virginia",
+    WI: "Wiscosi",
+    WY: "Wyoming"
+};
+let dropFilter = document.getElementById("mylist");
+dropFilter.addEventListener('change', () => filter(members));
+
 
 function create_table() {
     let body = document.getElementById('tab');
@@ -23,7 +77,10 @@ function create_table() {
 create_table();
 
 function fill_table(arr, head) {
-    headeader = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
+    header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
+    let body = document.getElementById('new_tab');
+    body.innerHTML = "";
+    let tbody = document.createElement("tbody");
     let thead = document.createElement("thead");
     let row = document.createElement("tr");
 
@@ -33,12 +90,8 @@ function fill_table(arr, head) {
         th.innerHTML = head[i];
         row.append(th);
     }
-
     thead.append(row);
     document.getElementById('new_tab').appendChild(thead);
-    let body = document.getElementById('new_tab');
-    body.innerHTML = "";
-    let tbody = document.createElement("tbody");
 
     for (var i = 0; i < arr.length; i++) {
         let row = document.createElement('tr');
@@ -62,31 +115,31 @@ function fill_table(arr, head) {
     body.appendChild(tbody)
 };
 
-function filter(obj) {
-    checkboxFilter = [];
-    for (var i = 0; i < obj.length; i++) {
+// function filter(obj) {
+//     let checkboxFilter = [];
+//     for (let i = 0; i < obj.length; i++) {
 
-        if (rep.checked && obj[i].party == 'R') {
-            checkboxFilter.push(obj[i]);
+//         if (rep.checked && obj[i].party == 'R') {
+//             checkboxFilter.push(obj[i]);
 
-        } else if (dem.checked && obj[i].party == 'D') {
-            checkboxFilter.push(obj[i]);
+//         } else if (dem.checked && obj[i].party == 'D') {
+//             checkboxFilter.push(obj[i]);
 
-        } else if (ind.checked && obj[i].party == 'I') {
-            checkboxFilter.push(obj[i]);
-        }
-    };
-    if (rep.checked != true && dem.checked != true && ind.checked != true) {
-        msg(noResult, cl1);
-    } else if (checkboxFilter.length === 0) {
-        msg(noMatch, cl2);
-    } else {
-        deleteMsg();
-    }
-    fill_table(checkboxFilter, header)
+//         } else if (ind.checked && obj[i].party == 'I') {
+//             checkboxFilter.push(obj[i]);
+//         }
+//     };
+//     if (rep.checked != true && dem.checked != true && ind.checked != true) {
+//         msg(noResult, cl1);
+//     } else if (checkboxFilter.length === 0) {
+//         msg(noMatch, cl2);
+//     } else {
+//         deleteMsg();
+//     }
+//     fill_table(checkboxFilter, header)
 
-}
-filter(members)
+// }
+// filter(members)
 
 function msg(arg, cl) {
     header = [];
@@ -103,3 +156,83 @@ function deleteMsg() {
     m.classList.remove("alert-warning")
     m.innerHTML = "";
 }
+
+function stateFilter(arg) {
+    let allStates = [];
+    for (let i = 0; i < arg.length; i++) {
+        allStates.push(arg[i].state)
+    }
+    let setStates = new Set(allStates);
+    let states = [...setStates];
+    return states;
+}
+let a = stateFilter(members)
+
+function createSelect() {
+    let select = document.getElementById("mylist");
+    for (let i = 0; i < a.length; i++) {
+        let option = document.createElement("option");
+        for (let [key, value] of Object.entries(statesNames)) {
+            if ([key] == a[i]) {
+                option.innerHTML = [value];
+            }
+        }
+        option.setAttribute("value", a[i]);
+        select.add(option);
+    };
+};
+createSelect()
+
+
+
+// function dropDownFilter(arg) {
+//     let filteredVal = [];
+//     let listVal = document.getElementById("mylist").value
+//     for (var i = 0; i < arg.length; i++) {
+//         if (arg[i].state === listVal) {
+//             filteredVal.push(arg[i]);
+//         } else if (listVal === "all") {
+//             filteredVal = members
+//         }
+//     }
+//     fill_table(filteredVal, header)
+// }
+
+function filter(obj) {
+    let checkboxFilter = [];
+    let listVal = document.getElementById("mylist").value
+    for (let i = 0; i < obj.length; i++) {
+
+        if (rep.checked && obj[i].party == 'R' && obj[i].state === listVal) {
+            checkboxFilter.push(obj[i]);
+
+        } else if (dem.checked && obj[i].party == 'D' && obj[i].state === listVal) {
+            checkboxFilter.push(obj[i]);
+
+        } else if (ind.checked && obj[i].party == 'I' && obj[i].state === listVal) {
+            checkboxFilter.push(obj[i]);
+
+        } else if (rep.checked && dem.checked && ind.checked && listVal === "") {
+            checkboxFilter.push(obj[i]);
+
+        } else if (rep.checked && obj[i].party == 'R' && listVal === "") {
+            checkboxFilter.push(obj[i]);
+
+        } else if (dem.checked && obj[i].party == 'D' && listVal === "") {
+            checkboxFilter.push(obj[i]);
+
+        } else if (ind.checked && obj[i].party == 'I' && listVal === "") {
+            checkboxFilter.push(obj[i]);
+
+        }
+    }; // To be kept
+    if (rep.checked != true && dem.checked != true && ind.checked != true) {
+        msg(noResult, cl1);
+    } else if (checkboxFilter.length === 0) {
+        msg(noMatch, cl2);
+    } else {
+        deleteMsg();
+    }
+    fill_table(checkboxFilter, header)
+}
+filter(members)

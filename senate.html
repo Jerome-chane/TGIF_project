@@ -110,15 +110,28 @@
 
 
     <div id="tab" class=" container table-responsive">
-        <div>
-            <span>Filter by Party:</span>
-            <label> <input type="checkbox" name="Democrat" value="Democrat" id="Democrat" checked>
-                Democrat</label>
-            <label> <input type="checkbox" name="Republican" value="Republican" id="Republican" checked>
-                Republican</label>
-            <label> <input type="checkbox" name="Independent" value="Independent" id="Independent" checked>
-                Independent</label>
+        <div class="filter">
+            <div class="col-6">
+                <span>Filter by Party:</span>
+                <label> <input type="checkbox" name="Democrat" value="Democrat" id="Democrat" checked>
+                    Democrat</label>
+                <label> <input type="checkbox" name="Republican" value="Republican" id="Republican" checked>
+                    Republican</label>
+                <label> <input type="checkbox" name="Independent" value="Independent" id="Independent" checked>
+                    Independent</label>
+            </div>
+            <div class="col6">
+                <div>
+                    <span>Filter By State: </span>
+                    <select id="mylist">
+                        <option value="">All</option>
+                    </select>
+                </div>
+
+            </div>
+
         </div>
+
         <div class="container ">
             <p class="message " id="message"></p>
         </div>

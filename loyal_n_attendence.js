@@ -95,9 +95,7 @@ if (window.location.pathname == "/house_loyalty.html" || window.location.pathnam
         total: "total_votes",
         pct: "votes_with_party_pct"
     });
-    console.log("loyalty")
 } else if (window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
-    console.log("attendence")
     sorted = members.sort(sortMembers);
     MissedVotes(sorted, tab2, {
         total: "missed_votes",
