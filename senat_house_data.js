@@ -34,7 +34,7 @@ fetch(link, {
         init();
     })
     .catch((error) => console.log(`Oops, Error`, error.message));
-
+let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
 let rep = document.getElementById("Republican");
 let dem = document.getElementById("Democrat");
 let ind = document.getElementById("Independent");
@@ -57,18 +57,18 @@ function create_table() {
 }
 
 
-function fill_table(arr) {
-    let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
+function fill_table(arr, head) {
+    header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
     let body = document.getElementById('new_tab');
     body.innerHTML = "";
     let tbody = document.createElement("tbody");
     let thead = document.createElement("thead");
     let row = document.createElement("tr");
 
-    for (var i = 0; i < header.length; i++) {
+    for (var i = 0; i < head.length; i++) {
         let th = document.createElement('th');
         th.setAttribute('class', 'text-center');
-        th.innerHTML = header[i];
+        th.innerHTML = head[i];
         row.append(th);
     }
     thead.append(row);
@@ -220,5 +220,5 @@ function filter(obj) {
     } else {
         deleteMsg();
     }
-    fill_table(checkboxFilter)
+    fill_table(checkboxFilter, header)
 }
