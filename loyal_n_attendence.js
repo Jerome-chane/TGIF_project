@@ -1,6 +1,42 @@
 let tab1 = document.getElementById('tab1');
 let tab2 = document.getElementById('tab2');
 
+
+glance_tab()
+let sorted;
+let topTen = function () {
+    let a = []
+    for (var i = 0; i < (sorted.length * 10 / 100); i++) {
+        a.push(sorted[i]);
+    }
+    return a;
+};
+
+if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html") {
+    sorted = members.sort(sortMembers2);
+    MissedVotes(sorted, tab1, {
+        total: "total_votes",
+        pct: "votes_with_party_pct"
+    });
+
+    MissedVotes(sorted.reverse(), tab2, {
+        total: "total_votes",
+        pct: "votes_with_party_pct"
+    });
+} else if (window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
+    sorted = members.sort(sortMembers);
+    MissedVotes(sorted, tab2, {
+        total: "missed_votes",
+        pct: "missed_votes_pct"
+    });
+
+    MissedVotes(sorted.reverse(), tab1, {
+        total: "missed_votes",
+        pct: "missed_votes_pct"
+    });
+    sorted = members.sort(sortMembers);
+}
+
 function glance_tab() {
     let r1 = document.getElementById('r1')
     let r2 = document.getElementById('r2')
@@ -20,8 +56,6 @@ function glance_tab() {
     t2.innerHTML = totalAvg.toFixed(2) + "%";
 
 }
-glance_tab()
-
 
 function sortMembers(a, b) {
     let missed = a.missed_votes_pct;
@@ -48,14 +82,6 @@ function sortMembers2(a, b) {
     }
     return comparaison;
 }
-let sorted;
-let topTen = function () {
-    let a = []
-    for (var i = 0; i < (sorted.length * 10 / 100); i++) {
-        a.push(sorted[i]);
-    }
-    return a;
-};
 
 function MissedVotes(members, tab, key) {
     let body = tab;
@@ -81,30 +107,4 @@ function MissedVotes(members, tab, key) {
 
     };
 
-}
-
-
-if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html") {
-    sorted = members.sort(sortMembers2);
-    MissedVotes(sorted, tab1, {
-        total: "total_votes",
-        pct: "votes_with_party_pct"
-    });
-
-    MissedVotes(sorted.reverse(), tab2, {
-        total: "total_votes",
-        pct: "votes_with_party_pct"
-    });
-} else if (window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
-    sorted = members.sort(sortMembers);
-    MissedVotes(sorted, tab2, {
-        total: "missed_votes",
-        pct: "missed_votes_pct"
-    });
-
-    MissedVotes(sorted.reverse(), tab1, {
-        total: "missed_votes",
-        pct: "missed_votes_pct"
-    });
-    sorted = members.sort(sortMembers);
 }

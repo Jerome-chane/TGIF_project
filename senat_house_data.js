@@ -1,5 +1,40 @@
-let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
-let members = data.results[0].members;
+let data;
+let link;
+if (window.location.pathname == "/senate.html") {
+    link = "https://api.propublica.org/congress/v1/113/senate/members.json";
+} else if (window.location.pathname == "/house.html") {
+    link = "https://api.propublica.org/congress/v1/113/house/members.json";
+};
+
+
+fetch(link, {
+        headers: {
+            "X-API-Key": "kwpzZtXi0XIKTNGLteY8NHvhMzNgxETsg9Lw0SAH"
+        },
+        method: 'GET'
+    })
+    .then(function (response) {
+
+        return response.json();
+    })
+    .then((newData) => {
+        data = newData;
+
+        function init() {
+            let members = data.results[0].members;
+            let filtered = stateFilter(members)
+            create_table();
+            filter(members);
+            createSelect(filtered);
+            rep.addEventListener('click', () => filter(members));
+            dem.addEventListener('click', () => filter(members));
+            ind.addEventListener('click', () => filter(members));
+            dropFilter.addEventListener('change', () => filter(members));
+        }
+        init();
+    })
+    .catch((error) => console.log(`Oops, Error`, error.message));
+
 let rep = document.getElementById("Republican");
 let dem = document.getElementById("Democrat");
 let ind = document.getElementById("Independent");
@@ -7,63 +42,9 @@ let noMatch = "No Match found";
 let noResult = "Please Select a Party";
 let cl1 = "alert text-center alert-danger";
 let cl2 = "alert text-center alert-warning";
-rep.addEventListener('click', () => filter(members));
-dem.addEventListener('click', () => filter(members));
-ind.addEventListener('click', () => filter(members));
-let statesNames = {
-    AL: "Alabama",
-    AK: "Alaska",
-    AZ: "Arizona",
-    AR: "Arkansas",
-    CA: "California",
-    CO: "Colorado",
-    CT: "Connecticut",
-    DE: "Delaware",
-    FL: "Florida",
-    GA: "Georgia",
-    HI: "Hawaii",
-    ID: "Idaho",
-    IL: "Illinois",
-    IN: "Indiana",
-    IA: "Iowa",
-    KS: "Kansas",
-    KY: "Kentucky",
-    LA: "Louisiana",
-    ME: "Maine",
-    MD: "Maryland",
-    MA: "Massachusetts",
-    MI: "Michigan",
-    MN: "Minnesota",
-    MS: "Mississippi",
-    MO: "Missouri",
-    MT: "Montana",
-    NE: "Nebraska",
-    NV: "Nevada",
-    NH: "New Hampshire",
-    NJ: "New Jersey",
-    NM: "New Mexico",
-    NY: "New York",
-    NC: "North Carolina",
-    ND: "North Dakota",
-    OH: "Ohio",
-    OK: "Oklahoma",
-    OR: "Oregon",
-    PA: "Pennsylvania",
-    RI: "Rhode Island",
-    SC: "South Carolina",
-    SD: "South Dakota",
-    TN: "Tennessee",
-    TX: "Texas",
-    UT: "Utah",
-    VT: "Vermont",
-    VA: " Virginia",
-    WA: "Washington",
-    WV: "West Virginia",
-    WI: "Wiscosi",
-    WY: "Wyoming"
-};
 let dropFilter = document.getElementById("mylist");
-dropFilter.addEventListener('change', () => filter(members));
+
+
 
 
 function create_table() {
@@ -74,20 +55,20 @@ function create_table() {
     body.appendChild(table);
 
 }
-create_table();
 
-function fill_table(arr, head) {
-    header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
+
+function fill_table(arr) {
+    let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
     let body = document.getElementById('new_tab');
     body.innerHTML = "";
     let tbody = document.createElement("tbody");
     let thead = document.createElement("thead");
     let row = document.createElement("tr");
 
-    for (var i = 0; i < head.length; i++) {
+    for (var i = 0; i < header.length; i++) {
         let th = document.createElement('th');
         th.setAttribute('class', 'text-center');
-        th.innerHTML = head[i];
+        th.innerHTML = header[i];
         row.append(th);
     }
     thead.append(row);
@@ -115,32 +96,6 @@ function fill_table(arr, head) {
     body.appendChild(tbody)
 };
 
-// function filter(obj) {
-//     let checkboxFilter = [];
-//     for (let i = 0; i < obj.length; i++) {
-
-//         if (rep.checked && obj[i].party == 'R') {
-//             checkboxFilter.push(obj[i]);
-
-//         } else if (dem.checked && obj[i].party == 'D') {
-//             checkboxFilter.push(obj[i]);
-
-//         } else if (ind.checked && obj[i].party == 'I') {
-//             checkboxFilter.push(obj[i]);
-//         }
-//     };
-//     if (rep.checked != true && dem.checked != true && ind.checked != true) {
-//         msg(noResult, cl1);
-//     } else if (checkboxFilter.length === 0) {
-//         msg(noMatch, cl2);
-//     } else {
-//         deleteMsg();
-//     }
-//     fill_table(checkboxFilter, header)
-
-// }
-// filter(members)
-
 function msg(arg, cl) {
     header = [];
     let empty = document.getElementById('new_tab');
@@ -156,6 +111,8 @@ function deleteMsg() {
     m.classList.remove("alert-warning")
     m.innerHTML = "";
 }
+// create_table();
+// filter(members)
 
 function stateFilter(arg) {
     let allStates = [];
@@ -166,66 +123,96 @@ function stateFilter(arg) {
     let states = [...setStates];
     return states;
 }
-let a = stateFilter(members)
+// let filtered = stateFilter(members)
 
-function createSelect() {
+function createSelect(arg) {
+    let statesNames = {
+        AL: "Alabama",
+        AS: "American Samoa",
+        AK: "Alaska",
+        AZ: "Arizona",
+        AR: "Arkansas",
+        CA: "California",
+        CO: "Colorado",
+        CT: "Connecticut",
+        DC: "Dist. of Columbia",
+        DE: "Delaware",
+        FL: "Florida",
+        GA: "Georgia",
+        GU: "Guam",
+        HI: "Hawaii",
+        ID: "Idaho",
+        IL: "Illinois",
+        IN: "Indiana",
+        IA: "Iowa",
+        KS: "Kansas",
+        KY: "Kentucky",
+        LA: "Louisiana",
+        ME: "Maine",
+        MD: "Maryland",
+        MA: "Massachusetts",
+        MI: "Michigan",
+        MN: "Minnesota",
+        MS: "Mississippi",
+        MO: "Missouri",
+        MP: "Mariana Islands",
+        MT: "Montana",
+        NE: "Nebraska",
+        NV: "Nevada",
+        NH: "New Hampshire",
+        NJ: "New Jersey",
+        NM: "New Mexico",
+        NY: "New York",
+        NC: "North Carolina",
+        ND: "North Dakota",
+        OH: "Ohio",
+        OK: "Oklahoma",
+        OR: "Oregon",
+        PA: "Pennsylvania",
+        PR: "Porto Rico",
+        RI: "Rhode Island",
+        SC: "South Carolina",
+        SD: "South Dakota",
+        TN: "Tennessee",
+        TX: "Texas",
+        UT: "Utah",
+        VT: "Vermont",
+        VI: "Virgin Islands",
+        VA: "Virginia",
+        WA: "Washington",
+        WV: "West Virginia",
+        WI: "Wiscosi",
+        WY: "Wyoming"
+    };
     let select = document.getElementById("mylist");
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < arg.length; i++) {
         let option = document.createElement("option");
         for (let [key, value] of Object.entries(statesNames)) {
-            if ([key] == a[i]) {
+            if ([key] == arg[i]) {
                 option.innerHTML = [value];
             }
         }
-        option.setAttribute("value", a[i]);
+        option.setAttribute("value", arg[i]);
         select.add(option);
     };
 };
-createSelect()
 
-
-
-// function dropDownFilter(arg) {
-//     let filteredVal = [];
-//     let listVal = document.getElementById("mylist").value
-//     for (var i = 0; i < arg.length; i++) {
-//         if (arg[i].state === listVal) {
-//             filteredVal.push(arg[i]);
-//         } else if (listVal === "all") {
-//             filteredVal = members
-//         }
-//     }
-//     fill_table(filteredVal, header)
-// }
 
 function filter(obj) {
     let checkboxFilter = [];
     let listVal = document.getElementById("mylist").value
     for (let i = 0; i < obj.length; i++) {
 
-        if (rep.checked && obj[i].party == 'R' && obj[i].state === listVal) {
-            checkboxFilter.push(obj[i]);
-
-        } else if (dem.checked && obj[i].party == 'D' && obj[i].state === listVal) {
-            checkboxFilter.push(obj[i]);
-
-        } else if (ind.checked && obj[i].party == 'I' && obj[i].state === listVal) {
-            checkboxFilter.push(obj[i]);
-
-        } else if (rep.checked && dem.checked && ind.checked && listVal === "") {
-            checkboxFilter.push(obj[i]);
-
-        } else if (rep.checked && obj[i].party == 'R' && listVal === "") {
-            checkboxFilter.push(obj[i]);
-
-        } else if (dem.checked && obj[i].party == 'D' && listVal === "") {
-            checkboxFilter.push(obj[i]);
-
-        } else if (ind.checked && obj[i].party == 'I' && listVal === "") {
-            checkboxFilter.push(obj[i]);
-
+        if (listVal === obj[i].state || listVal === "all") {
+            if (rep.checked && obj[i].party == 'R') {
+                checkboxFilter.push(obj[i]);
+            } else if (dem.checked && obj[i].party == 'D') {
+                checkboxFilter.push(obj[i]);
+            } else if (ind.checked && obj[i].party == 'I') {
+                checkboxFilter.push(obj[i]);
+            };
         }
-    }; // To be kept
+    };
     if (rep.checked != true && dem.checked != true && ind.checked != true) {
         msg(noResult, cl1);
     } else if (checkboxFilter.length === 0) {
@@ -233,6 +220,5 @@ function filter(obj) {
     } else {
         deleteMsg();
     }
-    fill_table(checkboxFilter, header)
+    fill_table(checkboxFilter)
 }
-filter(members)
