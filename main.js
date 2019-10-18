@@ -34,9 +34,6 @@ let topTen = function () {
     return a;
 };
 //---------------------//
-
-// senat_house_data var
-
 let link;
 let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
 let rep = document.getElementById("Republican");
@@ -62,9 +59,7 @@ if (window.location.pathname == "/house.html" || window.location.pathname == "/s
     multiLoader(); //loyal_n_attendence
     hideGlanceTab()
 } else {
-
     readMoreOrLess() // home
-
 }
 
 // ---------------------//
@@ -135,8 +130,10 @@ fetch(link, { // loyal_n_attendence fetch
     })
     .catch((error) => console.log(`Oops, Error`, error.message));
 
+//-----------------// loyal_n_attendence functions
+
 function count(obj) {
-    deleteLoader()
+    deleteMultiLoader()
     showGlanceTab()
     for (var i = 0, e = obj.length; i < e; i++) {
 
@@ -243,7 +240,7 @@ function multiLoader() {
 
 }
 
-function deleteLoader() {
+function deleteMultiLoader() {
     let loader = document.getElementById('load');
     let loader2 = document.getElementById('load2');
     let loader3 = document.getElementById('load3');
@@ -441,27 +438,19 @@ function filter(obj) {
 
 function loader() {
     let loader = document.getElementById('load');
-    let loader2 = document.getElementById('load2');
-    let loader3 = document.getElementById('load3');
     loader.setAttribute('class', 'loader');
-    loader2.setAttribute('class', 'loader');
-    loader3.setAttribute('class', 'loader');
 
 }
 
 function deleteLoader() {
     let loader = document.getElementById('load');
-    let loader2 = document.getElementById('load2');
-    let loader3 = document.getElementById('load3');
     loader.classList.remove('loader');
-    loader2.classList.remove('loader');
-    loader3.classList.remove('loader');
 }
 
 
 //-----------------//
 
-// home page
+// home page function
 function readMoreOrLess() {
     document.getElementById("butt").addEventListener("click", function () {
         let butt_txt = document.getElementById('butt');
