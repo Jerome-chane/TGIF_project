@@ -101,14 +101,18 @@
                 <div class="col-6">
 
                     <h2>Senate at a glance</h2>
-
+                    <div class='loadDiv'>
+                        <p id='load'></p>
+                    </div>
                     <table class="table table-bordered table-hover">
                         <thead>
+
                             <tr>
                                 <th>Party</th>
                                 <th>Number of Reps</th>
                                 <th>% Voted with Prty</th>
                             </tr>
+                        <tbody id='hide'>
                             <tr>
                                 <td>Republican</td>
                                 <td id="r1"></td>
@@ -129,7 +133,7 @@
                                 <td id="t1"></td>
                                 <td id="t2"></td>
                             </tr>
-                            </tbody>
+                        </tbody>
                     </table>
 
                 </div>
@@ -156,6 +160,7 @@
 
                         </tbody>
                     </table>
+                    <p id='load2'></p>
                 </div>
                 <div class="col-6">
 
@@ -172,6 +177,9 @@
 
                         </tbody>
                     </table>
+
+                    <p id='load3'></p>
+
                 </div>
             </div>
         </div>
@@ -186,14 +194,8 @@
 
     </footer>
 
-
-
-
-
-    <script src="./113_senate.js"></script>
-    <script src='./stats.js'></script>
-    <script src="./calcul.js"></script>
-    <script src="./loyal_n_attendence.js"></script>
+    <!-- <script src="./loyal_n_attendence.js"></script> -->
+    <script src="main.js"></script>
 
 
 </body>

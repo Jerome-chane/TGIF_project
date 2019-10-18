@@ -108,8 +108,11 @@
                 </div>
                 <div class="col-6">
                     <h2>Senate at a glance</h2>
-
+                    <div class='loadDiv'>
+                        <p id='load'></p>
+                    </div>
                     <table class="table table-bordered table-hover">
+
                         <thead>
                             <tr>
                                 <th>Party</th>
@@ -117,7 +120,7 @@
                                 <th>% Voted with Prty</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id='hide'>
                             <tr>
                                 <td>Republican</td>
                                 <td id="r1"></td>
@@ -151,35 +154,52 @@
                 <div class="col-6">
 
                     <h2>Least Engaged (Bottom 10% Attendance)</h2>
+
                     <table id='tab1' class="table table-bordered table-hover">
+
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Number of Missed Votes</th>
                                 <th>% Missed</th>
                             </tr>
+
                         </thead>
                         <tbody>
 
                         </tbody>
+
                     </table>
+                    <p id='load2'></p>
+                    <div class="container ">
+
+                    </div>
                 </div>
                 <div class="col-6">
                     <h2>Most Engaged (Top 10% Attendance)</h2>
+
                     <table id="tab2" class="table table-bordered table-hover">
+
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Number of Missed Votes</th>
                                 <th>% Missed</th>
                             </tr>
+
                         </thead>
                         <tbody>
 
-                        </tbody>
-                    </table>
+                </div>
+
+                </tbody>
+                </table>
+                <p id='load3'></p>
+                <div class="container ">
+
                 </div>
             </div>
+        </div>
         </div>
     </main>
 
@@ -188,14 +208,8 @@
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
-
-
-
-
-    <script src="./113_senate.js"></script>
-    <script src='./stats.js'></script>
-    <script src="./calcul.js"></script>
-    <script src="./loyal_n_attendence.js"></script>
+    <!-- <script src="./loyal_n_attendence.js"></script> -->
+    <script src="main.js"></script>
 
 
 

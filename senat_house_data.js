@@ -34,6 +34,11 @@ fetch(link, {
         init();
     })
     .catch((error) => console.log(`Oops, Error`, error.message));
+
+
+
+loader()
+
 let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
 let rep = document.getElementById("Republican");
 let dem = document.getElementById("Democrat");
@@ -58,6 +63,7 @@ function create_table() {
 
 
 function fill_table(arr, head) {
+    deleteLoader()
     header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
     let body = document.getElementById('new_tab');
     body.innerHTML = "";
@@ -221,4 +227,15 @@ function filter(obj) {
         deleteMsg();
     }
     fill_table(checkboxFilter, header)
+}
+
+function loader() {
+    let loader = document.getElementById('load');
+    loader.setAttribute('class', 'loader');
+
+}
+
+function deleteLoader() {
+    let loader = document.getElementById('load');
+    loader.classList.remove('loader');
 }

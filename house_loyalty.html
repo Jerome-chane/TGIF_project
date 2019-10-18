@@ -100,80 +100,92 @@
 
                 </div>
                 <div class="col-6">
-                    <h2>House at a glance</h2>
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Party</th>
-                                <th>Number of Reps</th>
-                                <th>% Voted with Prty</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Republican</td>
-                                <td id="r1"></td>
-                                <td id="r2"></td>
-                            </tr>
-                            <tr>
-                                <td>Democrat</td>
-                                <td id="d1"></td>
-                                <td id="d2"></td>
-                            </tr>
-                            <tr>
-                                <td>Independent</td>
-                                <td id="i1"></td>
-                                <td id="i2"></td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td id="t1"></td>
-                                <td id="t2"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div>
+                        <h2>House at a glance</h2>
+                        <div class='loadDiv'>
+                            <p id='load'></p>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Party</th>
+                                    <th>Number of Reps</th>
+                                    <th>% Voted with Prty</th>
+                                </tr>
+                            </thead>
+                            <tbody id='hide'>
+                                <tr>
+                                    <td>Republican</td>
+                                    <td id="r1"></td>
+                                    <td id="r2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Democrat</td>
+                                    <td id="d1"></td>
+                                    <td id="d2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Independent</td>
+                                    <td id="i1"></td>
+                                    <td id="i2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="t1"></td>
+                                    <td id="t2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr>
+            <hr>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
 
 
-                    <h2>Least Loyal (Bottom 10% of Party)</h2>
-                    <table id='tab1' class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number Party Votes</th>
-                                <th>% Party Votes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-6">
-                    <h2>Most Loyal (Top 10% of Party)</h2>
-                    <table id='tab2' class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number Party Votes</th>
-                                <th>% Party Votes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <h2>Least Loyal (Bottom 10% of Party)</h2>
+                        <table id='tab1' class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number Party Votes</th>
+                                    <th>% Party Votes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                        <p id='load2'></p>
+                        <div class="container ">
+                            <p id='load'></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h2>Most Loyal (Top 10% of Party)</h2>
+                        <table id='tab2' class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number Party Votes</th>
+                                    <th>% Party Votes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <p id='load3'></p>
+
+
+
+                    </div>
                 </div>
             </div>
-        </div>
 
     </main>
 
@@ -182,13 +194,8 @@
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
-
-
-    <script src="./113_house_representatives.js"></script>
-    <script src="stats.js"></script>
-    <script src="./calcul.js"></script>
-    <!-- <script src="./house_loyalty.js"></script> -->
-    <script src="./loyal_n_attendence.js"></script>
+    <!-- <script src="./loyal_n_attendence.js"></script> -->
+    <script src="main.js"></script>
 
 
 </body>

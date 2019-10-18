@@ -109,8 +109,11 @@
                 </div>
                 <div class="col-6">
                     <h2>House at a glance</h2>
-
+                    <div class='loadDiv'>
+                        <p id='load'></p>
+                    </div>
                     <table class="table table-bordered table-hover">
+
                         <thead>
                             <tr>
                                 <th>Party</th>
@@ -118,7 +121,9 @@
                                 <th>% Voted with Prty</th>
                             </tr>
                         </thead>
-                        <tbody>
+
+                        <tbody id='hide'>
+
                             <tr>
                                 <td>Republican</td>
                                 <td id="r1"></td>
@@ -139,12 +144,17 @@
                                 <td id="t1"></td>
                                 <td id="t2"></td>
                             </tr>
-                        </tbody>
-                    </table>
-
                 </div>
+                </tbody>
+                </table>
+                <p id='load'></p>
+
+
+
 
             </div>
+
+        </div>
         </div>
 
         <hr>
@@ -154,6 +164,7 @@
                 <div class="col-6">
 
                     <h2>Least Engaged (Bottom 10% Attendance)</h2>
+
                     <table id='tab1' class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -166,9 +177,13 @@
 
                         </tbody>
                     </table>
+
+                    <p id='load2'></p>
+
                 </div>
                 <div class="col-6">
                     <h2>Most Engaged (Top 10% Attendance)</h2>
+
                     <table id="tab2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -181,6 +196,9 @@
 
                         </tbody>
                     </table>
+
+                    <p id='load3'></p>
+
                 </div>
             </div>
         </div>
@@ -192,13 +210,8 @@
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
-
-
-
-    <script src="./113_house_representatives.js"></script>
-    <script src="stats.js"></script>
-    <script src="./calcul.js"></script>
-    <script src="./loyal_n_attendence.js"></script>
+    <!-- <script src="./loyal_n_attendence.js"></script> -->
+    <script src="main.js"></script>
 
 </body>
 
