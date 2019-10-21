@@ -1,5 +1,4 @@
-// loyal_n_attendence var
-
+// Variables for Attendence and Party Loyalty pages
 const stats = {
     'total_members': 0,
     'totalAvg': 0,
@@ -33,7 +32,8 @@ let topTen = function () {
     }
     return a;
 };
-//---------------------//
+
+// Variables for congress 113 pages
 let link;
 let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
 let rep = document.getElementById("Republican");
@@ -130,8 +130,7 @@ fetch(link, { // loyal_n_attendence fetch
     })
     .catch((error) => console.log(`Oops, Error`, error.message));
 
-//-----------------// loyal_n_attendence functions
-
+// Functions for Attendence and Party Loyalty pages
 function count(obj) {
     deleteMultiLoader()
     showGlanceTab()
@@ -260,7 +259,7 @@ function showGlanceTab() {
     tab.style.visibility = "visible";
 }
 
-//-----------------//  senat_house functions
+//  Functions for Congress 113 pages
 
 function create_table() {
     let body = document.getElementById('tab');
@@ -448,9 +447,8 @@ function deleteLoader() {
 }
 
 
-//-----------------//
 
-// home page function
+// home page function Read More-Less button
 function readMoreOrLess() {
     document.getElementById("butt").addEventListener("click", function () {
         let butt_txt = document.getElementById('butt');
