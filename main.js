@@ -20,31 +20,12 @@ const stats = {
     'Members who missed the most votes': 0,
     'Members who have missed the least votes': 0,
 };
-let tab1 = document.getElementById('tab1');
-let tab2 = document.getElementById('tab2');
 let data;
 let members;
 let sorted;
-let topTen = function () {
-    let a = []
-    for (var i = 0; i < (sorted.length * 10 / 100); i++) {
-        a.push(sorted[i]);
-    }
-    return a;
-};
-
 // Variables for congress 113 pages
 let link;
 let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
-let rep = document.getElementById("Republican");
-let dem = document.getElementById("Democrat");
-let ind = document.getElementById("Independent");
-let noMatch = "No Match found";
-let noResult = "Please Select a Party";
-let cl1 = "alert text-center alert-danger";
-let cl2 = "alert text-center alert-warning";
-let dropFilter = document.getElementById("mylist");
-
 //---------------------//
 
 
@@ -68,71 +49,60 @@ fetch(link, { // loyal_n_attendence fetch
         headers: {
             "X-API-Key": "kwpzZtXi0XIKTNGLteY8NHvhMzNgxETsg9Lw0SAH"
         },
-        method: 'GET'
+        // method: 'GET' // optional in this case
     })
-    .then(function (response) {
-
-        return response.json();
-    })
-    .then((newData) => {
+    .then(response => response.json())
+    .then(newData => {
         data = newData;
         members = data.results[0].members;
-
-        if (window.location.pathname == "/house.html" || window.location.pathname == "/senate.html") {
-            init2(); //senat_house_data
-        } else if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html" || window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
-            init(); //loyal_n_attendence
-        }
-
-        function init2() { //senat_house_data
-            let filtered = stateFilter(members)
-            create_table();
-            filter(members);
-            createSelect(filtered);
-            rep.addEventListener('click', () => filter(members));
-            dem.addEventListener('click', () => filter(members));
-            ind.addEventListener('click', () => filter(members));
-            dropFilter.addEventListener('change', () => filter(members));
-        }
-
-
-        function init() { //loyal_n_attendence
-            count(members);
-            glance_tab()
-            if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html") {
-                sorted = members.sort(sortMembers2);
-                MissedVotes(sorted, tab1, {
-                    total: "total_votes",
-                    pct: "votes_with_party_pct"
-                });
-
-                MissedVotes(sorted.reverse(), tab2, {
-                    total: "total_votes",
-                    pct: "votes_with_party_pct"
-                });
-            } else if (window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
-                sorted = members.sort(sortMembers);
-                MissedVotes(sorted, tab2, {
-                    total: "missed_votes",
-                    pct: "missed_votes_pct"
-                });
-
-                MissedVotes(sorted.reverse(), tab1, {
-                    total: "missed_votes",
-                    pct: "missed_votes_pct"
-                });
-                sorted = members.sort(sortMembers);
-            }
-
-        }
-
-
+        init();
     })
     .catch((error) => console.log(`Oops, Error`, error.message));
 
+function init() {
+    if (window.location.pathname == "/house.html" || window.location.pathname == "/senate.html") {
+        deleteLoader() // for senat_house_data
+        let filtered = stateFilter(members)
+        create_table();
+        filter(members);
+        createSelect(filtered);
+
+    } else if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html" || window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
+        deleteMultiLoader() //for loyal_n_attendence
+        count(members);
+        glance_tab()
+
+        let tab1 = document.getElementById('tab1');
+        let tab2 = document.getElementById('tab2');
+        if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html") {
+            sorted = members.sort(sortMembers2);
+            MissedVotes(sorted, tab1, {
+                total: "total_votes",
+                pct: "votes_with_party_pct"
+            });
+            MissedVotes(sorted.reverse(), tab2, {
+                total: "total_votes",
+                pct: "votes_with_party_pct"
+            });
+        } else if (window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
+            sorted = members.sort(sortMembers);
+            MissedVotes(sorted, tab2, {
+                total: "missed_votes",
+                pct: "missed_votes_pct"
+            });
+            MissedVotes(sorted.reverse(), tab1, {
+                total: "missed_votes",
+                pct: "missed_votes_pct"
+            });
+            sorted = members.sort(sortMembers);
+        }
+    }
+}
+
+
+
 // Functions for Attendence and Party Loyalty pages
 function count(obj) {
-    deleteMultiLoader()
     showGlanceTab()
     for (var i = 0, e = obj.length; i < e; i++) {
 
@@ -174,14 +144,12 @@ function glance_tab() {
     i2.innerHTML = '0.00' + "%"
     t1.innerHTML = stats['total_members']
     t2.innerHTML = stats['totalAvg'].toFixed(2) + "%";
-
 }
 
 function sortMembers(a, b) {
     let missed = a.missed_votes_pct;
     let missed2 = b.missed_votes_pct;
     let comparaison = 0;
-
     if (missed > missed2) {
         comparaison = 1;
     } else if (missed < missed2) {
@@ -194,7 +162,6 @@ function sortMembers2(a, b) {
     let missed = a.votes_with_party_pct;
     let missed2 = b.votes_with_party_pct;
     let comparaison = 0;
-
     if (missed > missed2) {
         comparaison = 1;
     } else if (missed < missed2) {
@@ -204,15 +171,20 @@ function sortMembers2(a, b) {
 }
 
 function MissedVotes(members, tab, key) {
+    let topTen = function () {
+        let a = []
+        for (var i = 0; i < (sorted.length * 10 / 100); i++) {
+            a.push(sorted[i]);
+        }
+        return a;
+    };
     let body = tab;
     let tbody = document.createElement('tbody');
     for (var i = 0; i < topTen().length; i++) {
-
         let row = document.createElement('tr');
         let name = document.createElement('td');
         let missed_votes = document.createElement('td');
         let missed_pct = document.createElement('td')
-
         name.innerHTML = '<a target="_blank" href="' + members[i].url + '">' +
             members[i].last_name + ' ' + members[i].first_name + ' ' + (members[i].middle_name || ' ') +
             '</a>';
@@ -224,7 +196,6 @@ function MissedVotes(members, tab, key) {
             topTen().length += 1
         }
         body.append(tbody)
-
     };
 
 }
@@ -236,7 +207,6 @@ function multiLoader() {
     loader.setAttribute('class', 'loader');
     loader2.setAttribute('class', 'loader');
     loader3.setAttribute('class', 'loader');
-
 }
 
 function deleteMultiLoader() {
@@ -253,15 +223,14 @@ function hideGlanceTab() {
     tab.style.visibility = "hidden";
 }
 
-
 function showGlanceTab() {
     let tab = document.getElementById('hide');
     tab.style.visibility = "visible";
 }
 
 //  Functions for Congress 113 pages
-
 function create_table() {
+
     let body = document.getElementById('tab');
     let table = document.createElement('table');
     table.setAttribute('class', 'table table-bordered table-hover');
@@ -271,7 +240,7 @@ function create_table() {
 }
 
 function fill_table(arr, head) {
-    deleteLoader()
+
     header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
     let body = document.getElementById('new_tab');
     body.innerHTML = "";
@@ -335,7 +304,6 @@ function stateFilter(arg) {
     let states = [...setStates];
     return states;
 }
-
 
 function createSelect(arg) {
     let statesNames = {
@@ -409,8 +377,20 @@ function createSelect(arg) {
     };
 };
 
-
 function filter(obj) {
+    let noMatch = "No Match found";
+    let noResult = "Please Select a Party";
+    let cl1 = "alert text-center alert-danger";
+    let cl2 = "alert text-center alert-warning";
+    let rep = document.getElementById("Republican");
+    let dem = document.getElementById("Democrat");
+    let ind = document.getElementById("Independent");
+    let dropFilter = document.getElementById("mylist");
+
+    rep.addEventListener('click', () => filter(members));
+    dem.addEventListener('click', () => filter(members));
+    ind.addEventListener('click', () => filter(members));
+    dropFilter.addEventListener('change', () => filter(members));
     let checkboxFilter = [];
     let listVal = document.getElementById("mylist").value
     for (let i = 0; i < obj.length; i++) {
@@ -445,8 +425,6 @@ function deleteLoader() {
     let loader = document.getElementById('load');
     loader.classList.remove('loader');
 }
-
-
 
 // home page function Read More-Less button
 function readMoreOrLess() {
