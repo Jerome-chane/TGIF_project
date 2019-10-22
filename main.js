@@ -59,6 +59,8 @@ fetch(link, { // loyal_n_attendence fetch
     })
     .catch((error) => console.log(`Oops, Error`, error.message));
 
+// ---------------------//
+
 function init() {
     if (window.location.pathname == "/house.html" || window.location.pathname == "/senate.html") {
         deleteLoader() // for senat_house_data
