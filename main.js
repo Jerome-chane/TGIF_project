@@ -68,7 +68,7 @@ fetch(link, { // loyal_n_attendence fetch
         headers: {
             "X-API-Key": "kwpzZtXi0XIKTNGLteY8NHvhMzNgxETsg9Lw0SAH"
         },
-        method: 'GET'
+        // method: 'GET'
     })
     .then(function (response) {
 
