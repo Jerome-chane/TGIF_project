@@ -163,8 +163,11 @@
                     <p>The United States passed its Freedom of Information Act (FOIA) in 1966, FOIAs, Access to
                         Information Acts (AIAs) or equivalent laws were passed in Denmark and Norway in 1970.</p>
             </div>
-            <a id="butt" href="#demo" class="btn btn-info" data-toggle="collapse">Read
-                More</a>
+            <div id='button'>
+                <a id="butt" href="#demo" class="btn btn-info" data-toggle="collapse" v-on:click="changeText()">Read
+                    {{text}}
+                </a>
+            </div>
         </div>
 
     </main>
@@ -173,10 +176,7 @@
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
-
-
-
-    <!-- <script src="./loyal_n_attendence.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="main.js"></script>
 </body>
 

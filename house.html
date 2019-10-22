@@ -107,17 +107,28 @@
             state is entitled to at least one representative. </p>
     </div>
 
-    <div id="tab" class=" container table-responsive">
+    <div id="table" class=" container table-responsive">
+
+
+
         <div class="filter">
             <div class="col-6">
+
+
                 <span>Filter by Party:</span>
-                <label> <input type="checkbox" name="Democrat" value="Democrat" id="Democrat" checked>
+                <label> <input v-on:click="filter()" type="checkbox" name="Democrat" value="Democrat" id="Democrat"
+                        checked>
                     Democrat</label>
-                <label> <input type="checkbox" name="Republican" value="Republican" id="Republican" checked>
+                <label> <input v-on:click="filter()" type="checkbox" name="Republican" value="Republican"
+                        id="Republican" checked>
                     Republican</label>
-                <label> <input type="checkbox" name="Independent" value="Independent" id="Independent" checked>
+                <label> <input v-on:click="filter()" type="checkbox" name="Independent" value="Independent"
+                        id="Independent" checked>
                     Independent</label>
             </div>
+
+
+
             <div class="col6">
                 <div>
                     <span>Filter By State: </span>
@@ -129,10 +140,35 @@
             </div>
 
         </div>
+
         <div class="container ">
             <p id='load'></p>
-            <p class="message " id="message"></p>
+            <p class="message" id="message"></p>
         </div>
+        <table id="firstTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Party</th>
+                    <th>State</th>
+                    <th>Years in Office</th>
+                    <th>% votes With Party</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr v-for="senator in filtered">
+                    <td><a v-bind:href="senator.url">{{senator.last_name}} {{senator.first_name}}
+                            {{senator.middle_name}}</a></td>
+                    <td>{{senator.party}}</td>
+                    <td>{{senator.state}}</td>
+                    <td>{{senator.seniority}}</td>
+                    <td>{{senator.votes_with_party_pct}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
     </div>
 
 
@@ -141,7 +177,7 @@
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
-    <!-- <script src="./senat_house_data.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="main.js"></script>
 </body>
 

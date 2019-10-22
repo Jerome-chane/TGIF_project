@@ -108,98 +108,102 @@
                 </div>
                 <div class="col-6">
                     <h2>Senate at a glance</h2>
-                    <div class='loadDiv'>
-                        <p id='load'></p>
-                    </div>
-                    <table class="table table-bordered table-hover">
 
-                        <thead>
-                            <tr>
-                                <th>Party</th>
-                                <th>Number of Reps</th>
-                                <th>% Voted with Prty</th>
-                            </tr>
-                        </thead>
-                        <tbody id='hide'>
-                            <tr>
-                                <td>Republican</td>
-                                <td id="r1"></td>
-                                <td id="r2"></td>
-                            </tr>
-                            <tr>
-                                <td>Democrat</td>
-                                <td id="d1"></td>
-                                <td id="d2"></td>
-                            </tr>
-                            <tr>
-                                <td>Independent</td>
-                                <td id="i1"></td>
-                                <td id="i2"></td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td id="t1"></td>
-                                <td id="t2"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="glance-tab">
+                        <div class='loadDiv'>
+                            <p id='load'></p>
+                        </div>
+                        <table class="table table-bordered table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th>Party</th>
+                                    <th>Number of Reps</th>
+                                    <th>% Voted with Prty</th>
+                                </tr>
+                            </thead>
+                            <tbody id='hide'>
+                                <tr>
+                                    <td>Republican</td>
+                                    <td id="r1"></td>
+                                    <td id="r2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Democrat</td>
+                                    <td id="d1"></td>
+                                    <td id="d2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Independent</td>
+                                    <td id="i1"></td>
+                                    <td id="i2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td id="t1"></td>
+                                    <td id="t2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
         <hr>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
+        <div id="attendence-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
 
-                    <h2>Least Engaged (Bottom 10% Attendance)</h2>
+                        <h2>Least Engaged (Bottom 10% Attendance)</h2>
 
-                    <table id='tab1' class="table table-bordered table-hover">
+                        <table id='tab1' class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Missed Votes</th>
+                                    <th>% Missed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="senator in senators">
+                                    <td>{{senator.first_name}}</td>
+                                    <td>{{senator.party}}</td>
+                                    <td>{{senator.state}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
-                            </tr>
+                        <p id='load2'></p>
 
-                        </thead>
-                        <tbody>
+                    </div>
+                    <div class="col-6">
+                        <h2>Most Engaged (Top 10% Attendance)</h2>
 
-                        </tbody>
+                        <table id="tab2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Missed Votes</th>
+                                    <th>% Missed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="senator in senators">
+                                    <td>{{senator.first_name}}</td>
+                                    <td>{{senator.party}}</td>
+                                    <td>{{senator.state}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    </table>
-                    <p id='load2'></p>
-                    <div class="container ">
+                        <p id='load3'></p>
 
                     </div>
                 </div>
-                <div class="col-6">
-                    <h2>Most Engaged (Top 10% Attendance)</h2>
-
-                    <table id="tab2" class="table table-bordered table-hover">
-
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
-                            </tr>
-
-                        </thead>
-                        <tbody>
-
-                </div>
-
-                </tbody>
-                </table>
-                <p id='load3'></p>
-                <div class="container ">
-
-                </div>
             </div>
-        </div>
         </div>
     </main>
 
@@ -208,7 +212,7 @@
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
 
     </footer>
-    <!-- <script src="./loyal_n_attendence.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="main.js"></script>
 
 
