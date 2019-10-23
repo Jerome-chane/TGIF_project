@@ -14,11 +14,6 @@ const stats = {
     'Democrats average votes with their party': 0,
     'Republicans average votes with their party': 0,
     'Independents average votes with their party': 0,
-
-    'Members who most often vote with their party': 0,
-    'Members who most often do not vote with their party': 0,
-    'Members who missed the most votes': 0,
-    'Members who have missed the least votes': 0,
 };
 let data;
 let members;
@@ -79,6 +74,7 @@ function init() {
 
         let tab1 = document.getElementById('tab1');
         let tab2 = document.getElementById('tab2');
+
         if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html") {
             sorted = members.sort(sortMembers2);
             MissedVotes(sorted, tab1, {
