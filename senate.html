@@ -135,8 +135,9 @@
             <div class="col6">
                 <div>
                     <span>Filter By State: </span>
-                    <select id="mylist">
+                    <select v-model="selectState" v-on:change="filter()" id="mylist">
                         <option value="all">All</option>
+                        <option v-for="state in states">{{state}}</option>
                     </select>
                 </div>
 

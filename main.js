@@ -135,6 +135,8 @@ if (window.location.pathname == "/senate.html" || window.location.pathname == "/
         data: {
             senators: [],
             filtered: [],
+            states: [],
+            selectState: "",
         },
 
         methods: {
@@ -150,27 +152,43 @@ if (window.location.pathname == "/senate.html" || window.location.pathname == "/
                     .then((newData) => {
                         this.senators = newData.results[0].members;
                         this.filter()
+                        this.stateFilter()
                     })
                     .catch((error) => console.log(`Oops, Error`, error.message));
             },
             filter() {
+                console.log(this.selectState)
                 this.filtered = [];
                 let rep = document.getElementById("Republican");
                 let dem = document.getElementById("Democrat");
                 let ind = document.getElementById("Independent");
                 for (let i = 0; i < this.senators.length; i++) {
-                    if (rep.checked && this.senators[i].party == 'R') {
-                        this.filtered.push(this.senators[i]);
-                    } else if (dem.checked && this.senators[i].party == 'D') {
-                        this.filtered.push(this.senators[i]);
-                    } else if (ind.checked && this.senators[i].party == 'I') {
-                        this.filtered.push(this.senators[i]);
-                    };
+                    if (this.selectState === this.senators[i].state || this.selectState === '' || this.selectState === 'all') {
+                        if (rep.checked && this.senators[i].party == 'R') {
+                            this.filtered.push(this.senators[i]);
+                        } else if (dem.checked && this.senators[i].party == 'D') {
+                            this.filtered.push(this.senators[i]);
+                        } else if (ind.checked && this.senators[i].party == 'I') {
+                            this.filtered.push(this.senators[i]);
+                        }
+                    }
+                };
+
+            },
+            stateFilter() {
+                let allStates = [];
+                for (let i = 0; i < this.senators.length; i++) {
+                    allStates.push(this.senators[i].state)
                 }
+                let setStates = new Set(allStates);
+                this.states = [...setStates];
+                return this.states;
 
             },
 
+
         },
+
 
         created: function () {
             this.getData()
@@ -180,5 +198,3 @@ if (window.location.pathname == "/senate.html" || window.location.pathname == "/
 
     });
 }
-
-// if (listVal === obj[i].state || listVal === "all")
