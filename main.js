@@ -26,26 +26,29 @@ let sorted;
 // Variables for congress 113 pages
 let link;
 let header = ['Full Name', 'Party', 'State', 'Seniority (years)', 'Percentage'];
-//---------------------//
 
 
+// This define which link will be sen to the fetch
 if (window.location.pathname == "/senate_loyalty.html" || window.location.pathname == "/senate_attendence.html" || window.location.pathname == "/senate.html") { // loyal_n_attendence IF
     link = "https://api.propublica.org/congress/v1/113/senate/members.json";
 } else if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/house_attendance.html" || window.location.pathname == "/house.html") {
     link = "https://api.propublica.org/congress/v1/113/house/members.json";
 };
+
+
+// This run the loaders or other funtion needed bebore fetch
 if (window.location.pathname == "/house.html" || window.location.pathname == "/senate.html") {
-    loader() //senat_house_data
+    loader() // For senat and house congress 113
 } else if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html" || window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
-    multiLoader(); //loyal_n_attendence
-    hideGlanceTab()
+    multiLoader();
+    hideGlanceTab() // For attendence and loyalty pages
 } else {
-    readMoreOrLess() // home
+    readMoreOrLess() // home page
 }
 
 // ---------------------//
 
-fetch(link, { // loyal_n_attendence fetch
+fetch(link, {
         headers: {
             "X-API-Key": "kwpzZtXi0XIKTNGLteY8NHvhMzNgxETsg9Lw0SAH"
         },
@@ -63,14 +66,14 @@ fetch(link, { // loyal_n_attendence fetch
 
 function init() {
     if (window.location.pathname == "/house.html" || window.location.pathname == "/senate.html") {
-        deleteLoader() // for senat_house_data
+        deleteLoader() // For senat and house congress 113
         let filtered = stateFilter(members)
         create_table();
         filter(members);
         createSelect(filtered);
 
     } else if (window.location.pathname == "/house_loyalty.html" || window.location.pathname == "/senate_loyalty.html" || window.location.pathname == "/house_attendance.html" || window.location.pathname == "/senate_attendence.html") {
-        deleteMultiLoader() //for loyal_n_attendence
+        deleteMultiLoader() // For attendence and loyalty pages
         count(members);
         glance_tab()
 
@@ -103,7 +106,7 @@ function init() {
 
 
 
-// Functions for Attendence and Party Loyalty pages
+// Functions for attendence and loyalty pages
 function count(obj) {
     showGlanceTab()
     for (var i = 0, e = obj.length; i < e; i++) {
