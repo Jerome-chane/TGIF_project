@@ -14,10 +14,6 @@ const stats = {
     'Republicans average votes with their party': 0,
     'Independents average votes with their party': 0,
 
-    'Members who most often vote with their party': 0,
-    'Members who most often do not vote with their party': 0,
-    'Members who missed the most votes': 0,
-    'Members who have missed the least votes': 0,
 };
 let link;
 let data;
@@ -183,18 +179,66 @@ if (window.location.pathname == "/senate.html" || window.location.pathname == "/
                 let setStates = new Set(allStates);
                 this.states = [...setStates];
                 return this.states;
+            },
+        },
+        created: function () {
+            this.getData()
+        }
+    });
+}
+if (window.location.pathname == "/senate_attendence.html" || window.location.pathname == "/house_attendance.html") {
+    let attendence = new Vue({
+        el: "#attendence",
+        data: {
+            members: [],
+        },
+        methods: {
+            getData() {
+                fetch(link, {
+                        headers: {
+                            "X-API-Key": "kwpzZtXi0XIKTNGLteY8NHvhMzNgxETsg9Lw0SAH"
+                        },
+                    })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then((newData) => {
+                        this.members = newData.results[0].members;
+                        // this.countMembers()
+                    })
+                    .catch((error) => console.log(`Oops, Error`, error.message));
+            },
+            countMembers() {
+                function sortMembers(a, b) {
+                    let missed = a.missed_votes_pct;
+                    let missed2 = b.missed_votes_pct;
+                    let comparaison = 0;
+                    if (missed > missed2) {
+                        comparaison = 1;
+                    } else if (missed < missed2) {
+                        comparaison = -1;
+                    }
+                    return comparaison;
+                }
 
+                this.members.sort(sortMembers)
+                console.log('hello')
             },
 
+        },
+        created: function () {
+            this.getData()
 
         },
 
 
-        created: function () {
-            this.getData()
-
-        }
-
-
-    });
+    })
 }
+
+// let topTen = function () {
+//     let a = []
+//     for (var i = 0; i < (sorted.length * 10 / 100); i++) {
+//         a.push(sorted[i]);
+//     }
+//     return a;
+// };
