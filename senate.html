@@ -119,14 +119,13 @@
 
 
                 <span>Filter by Party:</span>
-                <label> <input v-on:click="filter()" type="checkbox" name="Democrat" value="Democrat" id="Democrat"
-                        checked>
+                <label> <input v-on:click="filter()" v-model="checkBox" type="checkbox" value="D" id="Democrat" checked>
                     Democrat</label>
-                <label> <input v-on:click="filter()" type="checkbox" name="Republican" value="Republican"
-                        id="Republican" checked>
+                <label> <input v-on:click="filter()" v-model="checkBox" type="checkbox" value="R" id="Republican"
+                        checked>
                     Republican</label>
-                <label> <input v-on:click="filter()" type="checkbox" name="Independent" value="Independent"
-                        id="Independent" checked>
+                <label> <input v-on:click="filter()" v-model="checkBox" type="checkbox" value="I" id="Independent"
+                        checked>
                     Independent</label>
             </div>
 
@@ -146,7 +145,7 @@
         </div>
 
         <div class="container ">
-            <p id='load'></p>
+            <p v-if="senators.length === 0" id='load' class='loader'></p>
             <p class="message" id="message"></p>
         </div>
         <table id="firstTable" class="table table-bordered table-hover">
@@ -159,7 +158,7 @@
                     <th>% votes With Party</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="chapussa" id="chap">
                 <tr v-for="senator in filtered">
 
                     <td><a v-bind:href="senator.url">{{senator.last_name}} {{senator.first_name}}
@@ -171,7 +170,10 @@
                 </tr>
             </tbody>
         </table>
-
+        <div class="msg">
+            <p v-if="checkBox.length === 0" class=" alert alert-danger">Please Select a Party</p>
+            <p v-else-if="filtered.length === 0" class=" alert alert-warning">No Match Found</p>
+        </div>
 
     </div>
 

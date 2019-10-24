@@ -94,3 +94,12 @@ th {
     margin-left: 44%;
     margin-top: 12%;
 }
+
+
+.msg {
+    text-align: center;
+}
+
+.chapussa {
+    visibility: hidden;
+}
