@@ -60,7 +60,7 @@ function init() {
             },
             methods: {
                 filter() {
-                    chapussa()
+                    chapuza()
                     this.senators = members;
                     this.filtered = []; // automatically empty the array of members sent to the table
                     let allStates = [];
@@ -101,6 +101,8 @@ function init() {
             el: "#attendence",
             data: {
                 members: [],
+                topTen: [], // used to fill up the bottom tables
+                reverseTen: [],
                 vote: [],
                 republicans: [],
                 democrats: [],
@@ -124,12 +126,25 @@ function init() {
 
                 },
                 count() { //fills up the first table
+
+                    document.getElementById('chap').classList.remove('chapuza');
+                    document.getElementById('tab1').classList.remove('chapuza');
+                    document.getElementById('tab2').classList.remove('chapuza');
                     this.members = members;
+                    let reverseMembers = members.sort((a, b) => (b.missed_votes_pct - a.missed_votes_pct))
+                    members.sort((a, b) => (a.missed_votes_pct - b.missed_votes_pct))
+                    // this.reverseTen = members.sort((a, b) => (b.missed_votes_pct - a.missed_votes_pct)).reverse()
+
+                    let ten = (this.members.length * 10 / 100) // count the 10% of the members
+                    for (var i = 0; i < ten; i++) {
+                        this.topTen.push(members[i]) // push the 10% of members in new array
+                        this.reverseTen.push(reverseMembers[i])
+                    }
                     for (var i = 0, e = this.members.length; i < e; i++) {
                         if (this.members[i].party === 'R') {
                             this.republicans.push(this.members[i]);
                             this.repVotes += this.members[i].votes_with_party_pct;
-                        } else if (this.members[i].party === 'D') {
+                        } else if (this.members[i].party === 'D') { // count all different parties and their % votes
                             this.democrats.push(this.members[i]);
                             this.demVotes += this.members[i].votes_with_party_pct;
                         } else {
@@ -137,8 +152,15 @@ function init() {
                             this.indVotes += this.members[i].votes_with_party_pct;
                         };
                         this.totVotes = (this.repVotes + this.demVotes + this.indVotes) / this.members.length
+                        this.topTen.sort((a, b) => (a.missed_votes_pct - b.missed_votes_pct))
+                        this.reverseTen.sort((a, b) => (b.missed_votes_pct - a.missed_votes_pct))
                     }
-                }
+                    this.reverseTen.reverse()
+                },
+                // fiter() {
+                //     this.topTen.sort((a,b)=>(a.missed_votes_pct - b.missed_votes_pct))
+                // },
+
             },
             created: function () {
                 this.count()
@@ -165,6 +187,9 @@ function init() {
             methods: {
 
                 count() { // fills up the first table
+                    document.getElementById('chap').classList.remove('chapuza');
+                    document.getElementById('tab1').classList.remove('chapuza');
+                    document.getElementById('tab2').classList.remove('chapuza');
                     this.members = members
                     for (var i = 0, e = this.members.length; i < e; i++) {
                         if (this.members[i].party === 'R') {
@@ -193,7 +218,8 @@ function init() {
 } // init function end // TEST //
 
 
-function chapussa() {
-    let tab = document.getElementById('chap')
-    tab.classList.remove('chapussa');
+function chapuza() {
+    document.getElementById('chap').classList.remove('chapuza');
+    document.getElementById('msg1').classList.remove('chapuza');
+    document.getElementById('msg2').classList.remove('chapuza');
 }

@@ -145,9 +145,10 @@
         </div>
 
         <div class="container ">
-            <p v-if="senators.length === 0" id='load' class='loader'></p>
+
             <p class="message" id="message"></p>
         </div>
+        <!--  -->
         <table id="firstTable" class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -158,7 +159,7 @@
                     <th>% votes With Party</th>
                 </tr>
             </thead>
-            <tbody class="chapussa" id="chap">
+            <tbody class="chapuza" id="chap">
                 <tr v-for="senator in filtered">
 
                     <td><a v-bind:href="senator.url">{{senator.last_name}} {{senator.first_name}}
@@ -170,9 +171,13 @@
                 </tr>
             </tbody>
         </table>
+        <!--  -->
+        <p v-if="senators.length === 0" id='load' class='loader'></p>
         <div class="msg">
-            <p v-if="checkBox.length === 0" class=" alert alert-danger">Please Select a Party</p>
-            <p v-else-if="filtered.length === 0" class=" alert alert-warning">No Match Found</p>
+            <p class="chapuza" v-if="checkBox.length === 0" class=" alert alert-danger" id="msg1">Please Select a Party
+            </p>
+            <p class="chapuza" v-else-if="filtered.length === 0" class=" alert alert-warning" id="msg2">No Match Found
+            </p>
         </div>
 
     </div>

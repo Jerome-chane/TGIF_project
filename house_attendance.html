@@ -83,11 +83,8 @@
                 </ul>
             </div>
         </nav>
-
     </header>
-
     <main id="attendence">
-
         <div class="container">
             <div class="row">
                 <div class="col-6">
@@ -109,98 +106,92 @@
                 </div>
                 <div class="col-6">
                     <h2>House at a glance</h2>
-                    <div class='loadDiv'>
-                        <p id='load'></p>
-                    </div>
-                    <table class="table table-bordered table-hover">
-
-                        <thead>
-                            <tr>
-                                <th>Party</th>
-                                <th>Number of Reps</th>
-                                <th>% Voted with Prty</th>
-                            </tr>
-                        </thead>
-                        <tbody id='hide'>
-                            <tr>
-                                <td>Republican</td>
-                                <td>{{republicans.length}}</td>
-                                <td>{{(repVotes / republicans.length).toFixed(2)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Democrat</td>
-                                <td>{{democrats.length}}</td>
-                                <td>{{(demVotes / democrats.length).toFixed(2)}}</td>
-                            </tr>
-                            <tr>
-                                <td>Independent</td>
-                                <td>{{independents.length}}</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td>{{republicans.length +democrats.length+independents.length}}</td>
-                                <td>{{totVotes.toFixed(2)}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <br>
+                    <br>
+                    <p v-if="members.length === 0" id='load' class='loader'>
+                        <!--  -->
+                        <table id="chap" class="chapuza table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Party</th>
+                                    <th>Number of Reps</th>
+                                    <th>% Voted with Prty</th>
+                                </tr>
+                            </thead>
+                            <tbody id='hide'>
+                                <tr>
+                                    <td>Republican</td>
+                                    <td>{{republicans.length}}</td>
+                                    <td>{{(repVotes / republicans.length).toFixed(2)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Democrat</td>
+                                    <td>{{democrats.length}}</td>
+                                    <td>{{(demVotes / democrats.length).toFixed(2)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Independent</td>
+                                    <td>{{independents.length}}</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{{republicans.length +democrats.length+independents.length}}</td>
+                                    <td>{{totVotes.toFixed(2)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--  -->
                 </div>
-                <p id='load'></p>
             </div>
-
         </div>
         </div>
-
         <hr>
-
         <div class="container">
             <div class="row">
                 <div class="col-6">
-
                     <h2>Least Engaged (Bottom 10% Attendance)</h2>
-
-                    <table id='tab1' class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="senator in members">
-                                <td>{{senator.first_name}}</td>
-                                <td>{{senator.missed_votes}}</td>
-                                <td>{{senator.missed_votes_pct}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p id='load2'></p>
-
+                    <br>
+                    <p v-if="members.length === 0" id='load' class='loader'>
+                        <!--  -->
+                        <table id="tab1" class="chapuza table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Missed Votes</th>
+                                    <th>% Missed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="senator in topTen">
+                                    <td>{{senator.first_name}}</td>
+                                    <td>{{senator.missed_votes}}</td>
+                                    <td>{{senator.missed_votes_pct}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--  -->
                 </div>
                 <div class="col-6">
                     <h2>Most Engaged (Top 10% Attendance)</h2>
-
-                    <table id="tab2" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="senator in members">
-                                <td>{{senator.first_name}}</td>
-                                <td>{{senator.missed_votes}}</td>
-                                <td>{{senator.missed_votes_pct}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p id='load3'></p>
-
+                    <br>
+                    <p v-if="members.length === 0" id='load' class='loader'>
+                        <table id="tab2" class="chapuza table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Missed Votes</th>
+                                    <th>% Missed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="senator in topTen">
+                                    <td>{{senator.first_name}}</td>
+                                    <td>{{senator.missed_votes}}</td>
+                                    <td>{{senator.missed_votes_pct}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>

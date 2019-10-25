@@ -108,13 +108,12 @@
                 </div>
                 <div class="col-6">
                     <h2>Senate at a glance</h2>
-
-
-                    <div class='loadDiv'>
-                        <p id='load'></p>
-                    </div>
-                    <table class="table table-bordered table-hover">
-
+                    <br>
+                    <br>
+                    <p v-if="members.length === 0" id='load' class='loader'>
+                    </p>
+                    <!--  -->
+                    <table id="chap" class="chapuza table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Party</th>
@@ -122,7 +121,7 @@
                                 <th>% Voted with Prty</th>
                             </tr>
                         </thead>
-                        <tbody id='hide'>
+                        <tbody>
                             <tr>
                                 <td>Republican</td>
                                 <td>{{republicans.length}}</td>
@@ -145,7 +144,7 @@
                             </tr>
                         </tbody>
                     </table>
-
+                    <!--  -->
                 </div>
             </div>
         </div>
@@ -158,59 +157,55 @@
                 <div class="col-6">
 
                     <h2>Least Engaged (Bottom 10% Attendance)</h2>
-
-                    <table id='tab1' class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="senator in members">
-                                <td>{{senator.first_name}}</td>
-                                <td>{{senator.missed_votes}}</td>
-                                <td>{{senator.missed_votes_pct}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p id='load2'></p>
-
+                    <br>
+                    <p v-if="members.length === 0" id='load' class='loader'>
+                        <!--  -->
+                        <table id="tab1" class="chapuza table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Missed Votes</th>
+                                    <th>% Missed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="senator in reverseTen">
+                                    <td>{{senator.first_name}}</td>
+                                    <td>{{senator.missed_votes}}</td>
+                                    <td>{{senator.missed_votes_pct}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--  -->
                 </div>
                 <div class="col-6">
                     <h2>Most Engaged (Top 10% Attendance)</h2>
-
-                    <table id="tab2" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number of Missed Votes</th>
-                                <th>% Missed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="senator in members">
-                                <td>{{senator.first_name}}</td>
-                                <td>{{senator.missed_votes}}</td>
-                                <td>{{senator.missed_votes_pct}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p id='load3'></p>
-
+                    <br>
+                    <p v-if="members.length === 0" id='load' class='loader'>
+                        <!--  -->
+                        <table id="tab2" class="chapuza table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Missed Votes</th>
+                                    <th>% Missed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="senator in topTen">
+                                    <td>{{senator.first_name}}</td>
+                                    <td>{{senator.missed_votes}}</td>
+                                    <td>{{senator.missed_votes_pct}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--  -->
                 </div>
             </div>
         </div>
-
     </main>
-
     <footer class="page-footer">
-
         <p class="footer-copyright text-center py-3">©2016 TGIF | All Rights Reserved</p>
-
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="main.js"></script>
