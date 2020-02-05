@@ -471,7 +471,9 @@ function deleteLoader() {
 
 // home page function Read More-Less button
 function readMoreOrLess() {
-  document.getElementById("butt").addEventListener("click", function() {
+  let target = document.getElementById("butt");
+
+  target.addEventListener("click", function() {
     let butt_txt = document.getElementById("butt");
     if (butt_txt.innerHTML === "Read Less") {
       butt_txt.innerHTML = "Read More";
